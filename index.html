@@ -1,0 +1,1251 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="theme-color" content="#0f172a">
+    <meta name="keywords" content="BTS SIO, virtualisation, VMware, réseaux, stage, portfolio, informatique, Linux, Docker, Active Directory">
+    <meta name="description" content="Portfolio de Lahcen Mze Soilihi — Étudiant en BTS SIO spécialisé en virtualisation, réseaux et développement. Actuellement en stage informatique chez GES Atlantic à Nantes.">
+    <meta property="og:title" content="Lahcen Mze Soilihi">
+    <meta property="og:description" content="Portfolio de Lahcen Mze Soilihi — Étudiant en BTS SIO spécialisé en virtualisation, réseaux et développement.">
+    <meta property="og:type" content="website">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <title>Lahcen Mze Soilihi</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@300;400;500;600&family=Inter:wght@300;400;500&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <script src="https://unpkg.com/lucide@latest"></script>
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    fontFamily: {
+                        'heading': ['Space Grotesk', 'sans-serif'],
+                        'body': ['Inter', 'sans-serif'],
+                        'brand': ['Bricolage Grotesque', 'sans-serif'],
+                    }
+                }
+            }
+        }
+    </script>
+    <style>
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        html { scroll-behavior: smooth; }
+        body { background: #020202; color: #fff; font-family: 'Inter', sans-serif; overflow-x: hidden; }
+
+        :focus-visible {
+            outline: 2px solid #38bdf8;
+            outline-offset: 3px;
+        }
+
+        .skip-link {
+
+            position: absolute;
+            top: -40px;
+            left: 1rem;
+            background: rgba(0,0,0,0.85);
+            color: #fff;
+            padding: 0.75rem 1rem;
+            border-radius: 9999px;
+            z-index: 60;
+            transition: top 200ms ease;
+        }
+        .skip-link:focus {
+            top: 1rem;
+        }
+
+        @media (prefers-reduced-motion: reduce) {
+            *, *::before, *::after {
+                animation-duration: 0.01ms !important;
+                animation-iteration-count: 1 !important;
+                transition-duration: 0.01ms !important;
+                scroll-behavior: auto !important;
+            }
+        }
+
+        .grain {
+            position: fixed; top: 0; left: 0; width: 100%; height: 100%;
+            z-index: 40; pointer-events: none; opacity: 0.03;
+        }
+
+        .grid-bg {
+            background-image: linear-gradient(to right, #222 1px, transparent 1px),
+                              linear-gradient(to bottom, #222 1px, transparent 1px);
+            background-size: 40px 40px;
+            mask-image: linear-gradient(to bottom, transparent, black 30%, black 70%, transparent);
+            -webkit-mask-image: linear-gradient(to bottom, transparent, black 30%, black 70%, transparent);
+        }
+
+        .hero-gradient {
+            background: linear-gradient(to bottom, #FFFFFF, #E5E5E5, #737373);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+        }
+
+        .sky-glow { box-shadow: 0 0 20px rgba(56,189,248,0.6); }
+
+        @keyframes fadeInUp {
+            from { opacity: 0; transform: translateY(30px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+        @keyframes float {
+            0%, 100% { transform: translateY(0px); }
+            50% { transform: translateY(-10px); }
+        }
+        @keyframes ping {
+            75%, 100% { transform: scale(2); opacity: 0; }
+        }
+        @keyframes progressFill {
+            from { width: 0; }
+        }
+        @keyframes shimmer {
+            0% { background-position: -200% 0; }
+            100% { background-position: 200% 0; }
+        }
+        @keyframes rotateGlow {
+            0% { transform: rotate(0deg); }
+            100% { transform: rotate(360deg); }
+        }
+        @keyframes marquee {
+            0% { transform: translateX(0); }
+            100% { transform: translateX(-50%); }
+        }
+        @keyframes typewriter {
+            from { max-height: 0; opacity: 0; }
+            to { max-height: 200px; opacity: 1; }
+        }
+        @keyframes pulse-ring {
+            0% { transform: scale(1); opacity: 0.5; }
+            100% { transform: scale(1.5); opacity: 0; }
+        }
+
+        .animate-fade-up { animation: fadeInUp 0.8s cubic-bezier(0.2, 0.8, 0.2, 1) forwards; }
+        .animate-float { animation: float 3s ease-in-out infinite; }
+
+        .observe-hidden { opacity: 0; transform: translateY(30px); }
+        .observe-visible { animation: fadeInUp 0.8s cubic-bezier(0.2, 0.8, 0.2, 1) forwards; }
+
+        .skill-bar-fill {
+            animation: progressFill 1.5s cubic-bezier(0.2, 0.8, 0.2, 1) forwards;
+            position: relative;
+            overflow: hidden;
+        }
+        .skill-bar-fill::after {
+            content: '';
+            position: absolute;
+            top: 0; left: 0; width: 100%; height: 100%;
+            background: linear-gradient(90deg, transparent, rgba(255,255,255,0.15), transparent);
+            background-size: 200% 100%;
+            animation: shimmer 2.5s infinite;
+        }
+
+        .card-hover {
+            transition: all 500ms cubic-bezier(0.2, 0.8, 0.2, 1);
+            border: 1px solid #262626;
+        }
+        .card-hover:hover {
+            transform: translateY(-8px);
+            border-color: rgba(132,204,22,0.3);
+            box-shadow: 0 0 50px -10px rgba(132,204,22,0.3);
+        }
+
+        .project-card {
+            transition: all 500ms cubic-bezier(0.2, 0.8, 0.2, 1);
+            border: 1px solid #262626;
+            position: relative;
+            overflow: hidden;
+        }
+        .project-card::before {
+            content: '';
+            position: absolute;
+            top: 0; left: 0; right: 0;
+            height: 2px;
+            background: linear-gradient(90deg, transparent, #38bdf8, transparent);
+            opacity: 0;
+            transition: opacity 500ms;
+        }
+        .project-card:hover::before { opacity: 1; }
+        .project-card:hover {
+            transform: translateY(-6px);
+            border-color: rgba(132,204,22,0.3);
+            box-shadow: 0 0 50px -10px rgba(132,204,22,0.2);
+        }
+        .project-card .project-img {
+            transition: transform 700ms cubic-bezier(0.2, 0.8, 0.2, 1), opacity 700ms;
+            opacity: 0.7;
+        }
+        .project-card:hover .project-img {
+            transform: scale(1.05);
+            opacity: 0.9;
+        }
+        .project-card .project-arrow {
+            transition: all 300ms;
+            transform: translateX(-8px);
+            opacity: 0;
+        }
+        .project-card:hover .project-arrow {
+            transform: translateX(0);
+            opacity: 1;
+        }
+        .project-card .project-tag {
+            transition: all 300ms;
+        }
+        .project-card:hover .project-tag {
+            border-color: rgba(56,189,248,0.4);
+            background: rgba(56,189,248,0.08);
+        }
+
+        .timeline-line {
+            position: absolute;
+            left: 19px;
+            top: 48px;
+            bottom: 0;
+            width: 2px;
+            background: linear-gradient(to bottom, rgba(56,189,248,0.5), #262626, transparent);
+        }
+        .timeline-dot {
+            width: 12px; height: 12px;
+            border-radius: 50%;
+            background: #38bdf8;
+            box-shadow: 0 0 10px rgba(56,189,248,0.6);
+            position: relative; z-index: 2; flex-shrink: 0;
+        }
+        .timeline-dot-muted {
+            width: 12px; height: 12px;
+            border-radius: 50%;
+            background: #737373;
+            border: 2px solid #404040;
+            flex-shrink: 0; position: relative; z-index: 2;
+        }
+
+        .nav-link { position: relative; }
+        .nav-link::after {
+            content: '';
+            position: absolute;
+            bottom: -4px; left: 0;
+            width: 0; height: 1px;
+            background: #38bdf8;
+            transition: width 300ms;
+        }
+        .nav-link:hover::after { width: 100%; }
+        .nav-link.active::after { width: 100%; }
+
+        .tag {
+            display: inline-flex;
+            align-items: center;
+            gap: 6px;
+            padding: 6px 14px;
+            border-radius: 9999px;
+            border: 1px solid #262626;
+            font-size: 0.75rem;
+            font-weight: 500;
+            letter-spacing: 0.05em;
+            transition: all 300ms;
+            background: rgba(23,23,23,0.5);
+        }
+        .tag:hover {
+            border-color: rgba(56,189,248,0.5);
+            background: rgba(56,189,248,0.05);
+            color: #38bdf8;
+        }
+
+        ::-webkit-scrollbar { width: 6px; }
+        ::-webkit-scrollbar-track { background: #020202; }
+        ::-webkit-scrollbar-thumb { background: #333; border-radius: 3px; }
+        ::-webkit-scrollbar-thumb:hover { background: #555; }
+
+        .avatar-ring {
+            background: conic-gradient(from 0deg, #38bdf8, #0369a1, #38bdf8);
+            animation: rotateGlow 4s linear infinite;
+            padding: 3px;
+            border-radius: 50%;
+        }
+
+        .section-label {
+            font-family: ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, monospace;
+            font-size: 0.75rem;
+            letter-spacing: 0.2em;
+            text-transform: uppercase;
+            color: #38bdf8;
+        }
+
+        .contact-glow { position: relative; }
+        .contact-glow::before {
+            content: '';
+            position: absolute;
+            top: 50%; left: 50%;
+            transform: translate(-50%, -50%);
+            width: 300px; height: 300px;
+            background: radial-gradient(circle, rgba(56,189,248,0.08), transparent 70%);
+            pointer-events: none;
+        }
+
+        .mobile-menu {
+            transform: translateX(100%);
+            transition: transform 400ms cubic-bezier(0.2, 0.8, 0.2, 1);
+        }
+        .mobile-menu.open { transform: translateX(0); }
+
+        .toast {
+            transform: translateY(100px);
+            opacity: 0;
+            transition: all 400ms cubic-bezier(0.2, 0.8, 0.2, 1);
+        }
+        .toast.show { transform: translateY(0); opacity: 1; }
+
+        .vm-terminal {
+            font-family: ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, monospace;
+            font-size: 0.7rem;
+            line-height: 1.6;
+            color: #38bdf8;
+        }
+        .vm-terminal .prompt { color: #737373; }
+        .vm-terminal .output { color: #a3a3a3; }
+        .vm-terminal .success { color: #4ade80; }
+        .vm-terminal .warning { color: #facc15; }
+
+        .project-number {
+            font-family: 'Space Grotesk', sans-serif;
+            font-size: 5rem;
+            font-weight: 600;
+            line-height: 1;
+            color: transparent;
+            -webkit-text-stroke: 1px rgba(56,189,248,0.15);
+            position: absolute;
+            top: -10px;
+            right: 16px;
+            pointer-events: none;
+            transition: all 500ms;
+        }
+        .project-card:hover .project-number {
+            -webkit-text-stroke-color: rgba(56,189,248,0.3);
+        }
+    </style>
+</head>
+<body>
+    <a href="#hero" class="skip-link">Passer au contenu</a>
+
+    <svg class="grain" aria-hidden="true">
+        <filter id="grain"><feTurbulence type="fractalNoise" baseFrequency="0.8" numOctaves="3" stitchTiles="stitch"/></filter>
+        <rect width="100%" height="100%" filter="url(#grain)"/>
+    </svg>
+
+    <!-- Navigation -->
+    <nav id="navbar" class="fixed top-0 left-0 right-0 z-50 transition-all duration-500" aria-label="Navigation principale">
+        <div class="max-w-6xl mx-auto px-6 py-5 flex items-center justify-between">
+            <a href="#hero" class="font-brand text-xl font-semibold tracking-tight">
+                <span class="text-sky-400">L</span><span class="text-neutral-400">.</span>MS
+            </a>
+            <div class="hidden md:flex items-center gap-8">
+                <a href="#about" class="nav-link text-sm text-neutral-400 hover:text-white transition-colors">À propos</a>
+                <a href="#services" class="nav-link text-sm text-neutral-400 hover:text-white transition-colors">Services</a>
+                <a href="#skills" class="nav-link text-sm text-neutral-400 hover:text-white transition-colors">Compétences</a>
+                <a href="#projects" class="nav-link text-sm text-neutral-400 hover:text-white transition-colors">Projets</a>
+                <a href="#experience" class="nav-link text-sm text-neutral-400 hover:text-white transition-colors">Parcours</a>
+                <a href="#formation" class="nav-link text-sm text-neutral-400 hover:text-white transition-colors">Formation</a>
+                <a href="#contact" class="nav-link text-sm text-neutral-400 hover:text-white transition-colors">Contact</a>
+                <a href="#contact" class="ml-2 px-5 py-2.5 bg-sky-400 text-black text-sm font-medium rounded-full tracking-wide hover:bg-sky-300 transition-all duration-300 hover:scale-105" style="box-shadow: 0 0 20px rgba(56,189,248,0.4);">
+                    Me contacter
+                </a>
+            </div>
+            <button id="menuBtn" type="button" class="md:hidden text-white p-2" aria-label="Ouvrir le menu mobile" aria-expanded="false" aria-controls="mobileMenu">
+                <i data-lucide="menu" class="w-5 h-5"></i>
+            </button>
+        </div>
+    </nav>
+
+    <!-- Mobile Menu -->
+    <div id="mobileMenu" role="dialog" aria-modal="true" aria-hidden="true" class="mobile-menu fixed top-0 right-0 bottom-0 w-72 bg-neutral-950/95 backdrop-blur-xl z-50 border-l border-neutral-800 p-8 flex flex-col">
+        <button id="closeMenu" type="button" class="self-end mb-10 text-neutral-400 hover:text-white transition-colors" aria-label="Fermer le menu mobile">
+            <i data-lucide="x" class="w-6 h-6"></i>
+        </button>
+        <div class="flex flex-col gap-6">
+            <a href="#about" class="mobile-link text-lg text-neutral-300 hover:text-sky-400 transition-colors font-heading">À propos</a>
+            <a href="#services" class="mobile-link text-lg text-neutral-300 hover:text-sky-400 transition-colors font-heading">Services</a>
+            <a href="#skills" class="mobile-link text-lg text-neutral-300 hover:text-sky-400 transition-colors font-heading">Compétences</a>
+            <a href="#projects" class="mobile-link text-lg text-neutral-300 hover:text-sky-400 transition-colors font-heading">Projets</a>
+            <a href="#experience" class="mobile-link text-lg text-neutral-300 hover:text-sky-400 transition-colors font-heading">Parcours</a>
+            <a href="#formation" class="mobile-link text-lg text-neutral-300 hover:text-sky-400 transition-colors font-heading">Formation</a>
+            <a href="#contact" class="mobile-link text-lg text-neutral-300 hover:text-sky-400 transition-colors font-heading">Contact</a>
+        </div>
+        <div class="mt-auto">
+            <a href="#contact" class="mobile-link block text-center px-5 py-3 bg-sky-400 text-black text-sm font-medium rounded-full">Me contacter</a>
+        </div>
+    </div>
+    <div id="menuOverlay" class="fixed inset-0 bg-black/60 z-40 hidden" aria-hidden="true"></div>
+
+    <main>
+    <!-- Hero -->
+    <section id="hero" class="min-h-screen flex flex-col justify-between pt-24 pb-8 px-6 relative">
+        <div class="grid-bg absolute inset-0 z-0 opacity-40"></div>
+        <div class="absolute top-1/4 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[800px] h-[500px] bg-sky-500/5 rounded-full blur-[120px] pointer-events-none"></div>
+
+        <div class="max-w-6xl mx-auto w-full relative z-10 flex-1 flex flex-col justify-center">
+            <div class="mb-8 observe-hidden" data-observe>
+                <span class="tag">
+                    <span class="relative flex h-2 w-2">
+                        <span class="animate-ping absolute inline-flex h-full w-full rounded-full bg-sky-400 opacity-75"></span>
+                        <span class="relative inline-flex rounded-full h-2 w-2 bg-sky-400"></span>
+                    </span>
+                    Stage en cours — GES Atlantic, Nantes
+                </span>
+            </div>
+
+            <h1 class="font-heading font-medium tracking-tighter uppercase leading-[0.8] observe-hidden" data-observe>
+                <span class="block text-5xl md:text-7xl lg:text-8xl hero-gradient animate-fade-up" style="opacity:0; animation-delay:100ms">Lahcen</span>
+                <span class="block text-5xl md:text-7xl lg:text-8xl hero-gradient animate-fade-up" style="opacity:0; animation-delay:200ms">Mze Soilihi</span>
+            </h1>
+
+            <div class="mt-8 md:mt-12 max-w-xl observe-hidden" data-observe>
+                <p class="text-neutral-400 text-base md:text-lg font-light leading-relaxed animate-fade-up" style="opacity:0; animation-delay:400ms">
+                    Étudiant en <span class="text-sky-400 font-medium">BTS SIO</span> à l'AFTEC Rennes. Passionné par la virtualisation, les réseaux et le développement. Spécialisé dans les environnements <span class="text-white font-medium">VMware</span> et la <span class="text-white font-medium">veille technologique</span>.
+                </p>
+            </div>
+
+            <div class="mt-10 flex flex-wrap gap-4 observe-hidden" data-observe>
+                <a href="#contact" class="animate-fade-up inline-flex items-center gap-2 px-7 py-3.5 bg-sky-400 text-black font-medium rounded-full tracking-wide hover:bg-sky-300 transition-all duration-300 hover:scale-105 sky-glow" style="opacity:0; animation-delay:500ms; box-shadow: 0 0 20px rgba(56,189,248,0.6)">
+                    <i data-lucide="send" class="w-4 h-4"></i>
+                    Me contacter
+                </a>
+                <a href="#projects" class="animate-fade-up inline-flex items-center gap-2 px-7 py-3.5 border border-neutral-700 text-neutral-300 font-medium rounded-full tracking-wide hover:border-neutral-500 hover:text-white transition-all duration-300" style="opacity:0; animation-delay:600ms">
+                    <i data-lucide="folder-open" class="w-4 h-4"></i>
+                    Voir mes projets
+                </a>
+            </div>
+        </div>
+
+        <div class="max-w-6xl mx-auto w-full relative z-10 observe-hidden" data-observe>
+            <div class="grid grid-cols-2 md:grid-cols-4 gap-px bg-neutral-800 rounded-2xl overflow-hidden animate-fade-up" style="opacity:0; animation-delay:700ms">
+                <div class="bg-[#050505] p-6 text-center">
+                    <div class="font-heading text-2xl md:text-3xl font-medium text-white">BTS<span class="text-sky-400">SIO</span></div>
+                    <div class="text-neutral-500 text-xs mt-1 uppercase tracking-widest">Formation</div>
+                </div>
+                <div class="bg-[#050505] p-6 text-center">
+                    <div class="font-heading text-2xl md:text-3xl font-medium text-white">4</div>
+                    <div class="text-neutral-500 text-xs mt-1 uppercase tracking-widest">Projets VM</div>
+                </div>
+                <div class="bg-[#050505] p-6 text-center">
+                    <div class="font-heading text-2xl md:text-3xl font-medium text-white">6+</div>
+                    <div class="text-neutral-500 text-xs mt-1 uppercase tracking-widest">Langages</div>
+                </div>
+                <div class="bg-[#050505] p-6 text-center">
+                    <div class="font-heading text-2xl md:text-3xl font-medium text-white">2</div>
+                    <div class="text-neutral-500 text-xs mt-1 uppercase tracking-widest">Stages</div>
+                </div>
+            </div>
+        </div>
+
+        <div class="absolute bottom-8 left-1/2 -translate-x-1/2 flex flex-col items-center gap-2 animate-float">
+            <span class="text-neutral-600 text-[10px] uppercase tracking-[0.3em]">Scroll</span>
+            <div class="w-px h-8 bg-gradient-to-b from-neutral-600 to-transparent"></div>
+        </div>
+    </section>
+
+    <!-- About -->
+    <section id="about" class="py-24 md:py-32 px-6 relative">
+        <div class="absolute top-0 right-0 w-[600px] h-[400px] bg-sky-500/3 rounded-full blur-[120px] pointer-events-none"></div>
+        <div class="max-w-6xl mx-auto relative z-10">
+            <div class="observe-hidden" data-observe>
+                <span class="section-label">// À propos</span>
+                <h2 class="font-heading text-3xl md:text-5xl font-medium tracking-tight mt-4">Qui suis-je<span class="text-sky-400">.</span></h2>
+            </div>
+            <div class="mt-16 grid grid-cols-1 md:grid-cols-12 gap-12 md:gap-16">
+                <div class="md:col-span-4 observe-hidden" data-observe>
+                    <div class="flex flex-col items-center md:items-start">
+                        <div class="avatar-ring mb-6">
+                            <div class="w-36 h-36 rounded-full bg-neutral-900 flex items-center justify-center">
+                                <span class="font-heading text-4xl font-semibold text-sky-400">LM</span>
+                            </div>
+                        </div>
+                        <h3 class="font-heading text-xl font-medium tracking-tight">Lahcen Mze Soilihi</h3>
+                        <p class="text-neutral-500 text-sm mt-1">Étudiant BTS SIO</p>
+                        <div class="mt-6 space-y-3 w-full">
+                            <div class="flex items-center gap-3 text-sm text-neutral-400">
+                                <i data-lucide="map-pin" class="w-4 h-4 text-sky-400 flex-shrink-0"></i>
+                                <span>Rennes, 35000</span>
+                            </div>
+                            <div class="flex items-center gap-3 text-sm text-neutral-400">
+                                <i data-lucide="mail" class="w-4 h-4 text-sky-400 flex-shrink-0"></i>
+                                <span>lahcenmze@gmail.com</span>
+                            </div>
+                            <div class="flex items-center gap-3 text-sm text-neutral-400">
+                                <i data-lucide="phone" class="w-4 h-4 text-sky-400 flex-shrink-0"></i>
+                                <span>07 74 79 00 80</span>
+                            </div>
+                            <div class="flex items-center gap-3 text-sm text-neutral-400">
+                                <i data-lucide="graduation-cap" class="w-4 h-4 text-sky-400 flex-shrink-0"></i>
+                                <span>AFTEC Rennes</span>
+                            </div>
+                        </div>
+                        <div class="mt-8 flex gap-3">
+                            <span class="px-3 py-1.5 bg-neutral-900 border border-neutral-800 rounded-lg text-xs text-neutral-400 font-medium">🇫🇷 Maternelle</span>
+                            <span class="px-3 py-1.5 bg-neutral-900 border border-neutral-800 rounded-lg text-xs text-neutral-400 font-medium">🇬🇧 B1</span>
+                            <span class="px-3 py-1.5 bg-neutral-900 border border-neutral-800 rounded-lg text-xs text-neutral-400 font-medium">🇪🇸 A2</span>
+                        </div>
+                    </div>
+                </div>
+                <div class="md:col-span-8 observe-hidden" data-observe>
+                    <div class="space-y-6">
+                        <p class="text-neutral-300 text-base md:text-lg font-light leading-relaxed">
+                            Étudiant en <span class="text-white font-medium">BTS SIO</span> à l'<span class="text-white font-medium">AFTEC Rennes</span>, je me forme aux métiers de l'informatique avec une double compétence en développement et en réseaux. Ma spécialité : la <span class="text-sky-400 font-medium">virtualisation</span> et la <span class="text-sky-400 font-medium">veille technologique</span>.
+                        </p>
+                        <p class="text-neutral-400 text-base font-light leading-relaxed">
+                            Mon parcours a débuté par un baccalauréat <span class="text-neutral-300">STI2D</span> au Lycée Pierre Mendès France. Au fil de ma formation BTS SIO, j'ai développé une expertise pratique sur les machines virtuelles avec <span class="text-neutral-300">VMware Workstation Pro</span>, déployant des infrastructures complètes : Active Directory, DHCP, DNS, serveurs web Linux, et j'entretiens une veille constante sur les évolutions du secteur.
+                        </p>
+                        <p class="text-neutral-400 text-base font-light leading-relaxed">
+                            Actuellement en stage informatique chez <span class="text-sky-400 font-medium">GES Atlantic à Nantes</span> du 15 juin au 23 juillet 2026, je renforce mes compétences en administration système, réseau et outils métiers tout en poursuivant ma veille technologique.
+                        </p>
+                    </div>
+                    <div class="mt-10">
+                        <h4 class="text-sm font-medium text-neutral-500 uppercase tracking-widest mb-5">Savoir-être</h4>
+                        <div class="grid grid-cols-1 sm:grid-cols-3 gap-4">
+                            <div class="card-hover bg-[#050505] rounded-xl p-5">
+                                <div class="w-10 h-10 rounded-lg bg-sky-400/10 flex items-center justify-center mb-3"><i data-lucide="users" class="w-5 h-5 text-sky-400"></i></div>
+                                <h5 class="text-sm font-medium text-white mb-1">Bon relationnel</h5>
+                                <p class="text-xs text-neutral-500">Souriant et sociable</p>
+                            </div>
+                            <div class="card-hover bg-[#050505] rounded-xl p-5">
+                                <div class="w-10 h-10 rounded-lg bg-sky-400/10 flex items-center justify-center mb-3"><i data-lucide="refresh-cw" class="w-5 h-5 text-sky-400"></i></div>
+                                <h5 class="text-sm font-medium text-white mb-1">Adaptabilité</h5>
+                                <p class="text-xs text-neutral-500">En milieu professionnel</p>
+                            </div>
+                            <div class="card-hover bg-[#050505] rounded-xl p-5">
+                                <div class="w-10 h-10 rounded-lg bg-sky-400/10 flex items-center justify-center mb-3"><i data-lucide="target" class="w-5 h-5 text-sky-400"></i></div>
+                                <h5 class="text-sm font-medium text-white mb-1">Autonomie</h5>
+                                <p class="text-xs text-neutral-500">Gestion de projets sans supervision</p>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="mt-10">
+                        <h4 class="text-sm font-medium text-neutral-500 uppercase tracking-widest mb-5">Centres d'intérêt</h4>
+                        <div class="flex flex-wrap gap-3">
+                            <span class="tag"><i data-lucide="cpu" class="w-3.5 h-3.5"></i> Veille IA & informatique</span>
+                            <span class="tag"><i data-lucide="circle-dot" class="w-3.5 h-3.5"></i> Technologie</span>
+                            <span class="tag"><i data-lucide="dumbbell" class="w-3.5 h-3.5"></i> Musculation</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Services -->
+    <section id="services" class="py-24 md:py-32 px-6 relative">
+        <div class="absolute top-0 left-0 w-[500px] h-[350px] bg-sky-500/4 rounded-full blur-[120px] pointer-events-none"></div>
+        <div class="max-w-6xl mx-auto relative z-10">
+            <div class="observe-hidden" data-observe>
+                <span class="section-label">// Services</span>
+                <h2 class="font-heading text-3xl md:text-5xl font-medium tracking-tight mt-4">Ce que je peux faire pour vous<span class="text-sky-400">.</span></h2>
+                <p class="text-neutral-500 mt-4 max-w-2xl font-light">Je propose des services concrets en virtualisation, administration système, développement web et veille technologique pour des projets professionnels et des environnements techniques.</p>
+            </div>
+            <div class="mt-16 grid grid-cols-1 md:grid-cols-3 gap-8">
+                <div class="card-hover bg-[#050505] rounded-3xl p-8 observe-hidden" data-observe>
+                    <div class="flex items-center justify-center w-14 h-14 rounded-3xl bg-sky-400/10 mb-6">
+                        <i data-lucide="cpu" class="w-6 h-6 text-sky-400"></i>
+                    </div>
+                    <h3 class="font-heading text-xl font-medium text-white mb-4">Virtualisation</h3>
+                    <p class="text-neutral-400 text-sm leading-relaxed">Conception et maintenance de labos VMware, Hyper-V et Proxmox, gestion de machines virtuelles et configuration réseau.</p>
+                    <ul class="mt-6 space-y-3 text-neutral-500 text-sm">
+                        <li>Déploiement d'Active Directory, DHCP, DNS</li>
+                        <li>Automatisation de VM et sauvegardes</li>
+                        <li>Support pour environnements hybrides</li>
+                    </ul>
+                </div>
+                <div class="card-hover bg-[#050505] rounded-3xl p-8 observe-hidden" data-observe>
+                    <div class="flex items-center justify-center w-14 h-14 rounded-3xl bg-sky-400/10 mb-6">
+                        <i data-lucide="code" class="w-6 h-6 text-sky-400"></i>
+                    </div>
+                    <h3 class="font-heading text-xl font-medium text-white mb-4">Développement Web</h3>
+                    <p class="text-neutral-400 text-sm leading-relaxed">Création de sites web simples et efficaces avec HTML, CSS, JavaScript, PHP et WordPress, adaptés aux besoins des petites structures.</p>
+                    <ul class="mt-6 space-y-3 text-neutral-500 text-sm">
+                        <li>Sites vitrines responsives</li>
+                        <li>Intégration HTML/CSS & JS</li>
+                        <li>Maintenance et mises à jour</li>
+                    </ul>
+                </div>
+                <div class="card-hover bg-[#050505] rounded-3xl p-8 observe-hidden" data-observe>
+                    <div class="flex items-center justify-center w-14 h-14 rounded-3xl bg-sky-400/10 mb-6">
+                        <i data-lucide="search" class="w-6 h-6 text-sky-400"></i>
+                    </div>
+                    <h3 class="font-heading text-xl font-medium text-white mb-4">Veille & Analyse</h3>
+                    <p class="text-neutral-400 text-sm leading-relaxed">Synthèse d'études techniques, benchmarks et recommandations pour choisir la meilleure solution de virtualisation ou de conteneurisation.</p>
+                    <ul class="mt-6 space-y-3 text-neutral-500 text-sm">
+                        <li>Comparatifs VMware / Hyper-V / Proxmox</li>
+                        <li>Décision entre VM et Docker</li>
+                        <li>Rapports clairs et actionnables</li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Skills -->
+    <section id="skills" class="py-24 md:py-32 px-6 relative">
+        <div class="absolute bottom-0 left-0 w-[600px] h-[400px] bg-sky-500/3 rounded-full blur-[120px] pointer-events-none"></div>
+        <div class="max-w-6xl mx-auto relative z-10">
+            <div class="observe-hidden" data-observe>
+                <span class="section-label">// Compétences</span>
+                <h2 class="font-heading text-3xl md:text-5xl font-medium tracking-tight mt-4">Mon arsenal technique<span class="text-sky-400">.</span></h2>
+                <p class="text-neutral-500 mt-4 max-w-lg font-light">Les technologies et outils que je maîtrise au quotidien dans ma formation et mes projets de virtualisation.</p>
+            </div>
+            <div class="mt-16 grid grid-cols-1 md:grid-cols-2 gap-8">
+                <div class="card-hover bg-[#050505] rounded-2xl p-8 observe-hidden" data-observe>
+                    <div class="flex items-center gap-3 mb-8">
+                        <div class="w-10 h-10 rounded-xl bg-sky-400/10 flex items-center justify-center"><i data-lucide="code-2" class="w-5 h-5 text-sky-400"></i></div>
+                        <div>
+                            <h3 class="font-heading text-lg font-medium tracking-tight">Développement</h3>
+                            <p class="text-neutral-500 text-xs">Langages & CMS</p>
+                        </div>
+                    </div>
+                    <div class="space-y-5">
+                        <div class="skill-item"><div class="flex justify-between text-sm mb-2"><span class="text-neutral-300">Python</span><span class="text-neutral-500 font-mono text-xs">75%</span></div><div class="h-1.5 bg-neutral-800 rounded-full overflow-hidden"><div class="skill-bar-fill h-full bg-gradient-to-r from-sky-500 to-sky-400 rounded-full" style="width:75%"></div></div></div>
+                        <div class="skill-item"><div class="flex justify-between text-sm mb-2"><span class="text-neutral-300">HTML / CSS</span><span class="text-neutral-500 font-mono text-xs">85%</span></div><div class="h-1.5 bg-neutral-800 rounded-full overflow-hidden"><div class="skill-bar-fill h-full bg-gradient-to-r from-sky-500 to-sky-400 rounded-full" style="width:85%"></div></div></div>
+                        <div class="skill-item"><div class="flex justify-between text-sm mb-2"><span class="text-neutral-300">JavaScript</span><span class="text-neutral-500 font-mono text-xs">70%</span></div><div class="h-1.5 bg-neutral-800 rounded-full overflow-hidden"><div class="skill-bar-fill h-full bg-gradient-to-r from-sky-500 to-sky-400 rounded-full" style="width:70%"></div></div></div>
+                        <div class="skill-item"><div class="flex justify-between text-sm mb-2"><span class="text-neutral-300">PHP</span><span class="text-neutral-500 font-mono text-xs">65%</span></div><div class="h-1.5 bg-neutral-800 rounded-full overflow-hidden"><div class="skill-bar-fill h-full bg-gradient-to-r from-sky-500 to-sky-400 rounded-full" style="width:65%"></div></div></div>
+                        <div class="skill-item"><div class="flex justify-between text-sm mb-2"><span class="text-neutral-300">WordPress</span><span class="text-neutral-500 font-mono text-xs">70%</span></div><div class="h-1.5 bg-neutral-800 rounded-full overflow-hidden"><div class="skill-bar-fill h-full bg-gradient-to-r from-sky-500 to-sky-400 rounded-full" style="width:70%"></div></div></div>
+                    </div>
+                </div>
+                <div class="card-hover bg-[#050505] rounded-2xl p-8 observe-hidden" data-observe>
+                    <div class="flex items-center gap-3 mb-8">
+                        <div class="w-10 h-10 rounded-xl bg-sky-400/10 flex items-center justify-center"><i data-lucide="server" class="w-5 h-5 text-sky-400"></i></div>
+                        <div>
+                            <h3 class="font-heading text-lg font-medium tracking-tight">Systèmes & Réseaux</h3>
+                            <p class="text-neutral-500 text-xs">OS, Virtualisation & Services</p>
+                        </div>
+                    </div>
+                    <div class="space-y-5">
+                        <div class="skill-item"><div class="flex justify-between text-sm mb-2"><span class="text-neutral-300">Windows Server (AD DS, DHCP, DNS)</span><span class="text-neutral-500 font-mono text-xs">80%</span></div><div class="h-1.5 bg-neutral-800 rounded-full overflow-hidden"><div class="skill-bar-fill h-full bg-gradient-to-r from-sky-500 to-sky-400 rounded-full" style="width:80%"></div></div></div>
+                        <div class="skill-item"><div class="flex justify-between text-sm mb-2"><span class="text-neutral-300">Windows 7 / 8 / 10 / 11</span><span class="text-neutral-500 font-mono text-xs">90%</span></div><div class="h-1.5 bg-neutral-800 rounded-full overflow-hidden"><div class="skill-bar-fill h-full bg-gradient-to-r from-sky-500 to-sky-400 rounded-full" style="width:90%"></div></div></div>
+                        <div class="skill-item"><div class="flex justify-between text-sm mb-2"><span class="text-neutral-300">Linux (Ubuntu, Debian)</span><span class="text-neutral-500 font-mono text-xs">65%</span></div><div class="h-1.5 bg-neutral-800 rounded-full overflow-hidden"><div class="skill-bar-fill h-full bg-gradient-to-r from-sky-500 to-sky-400 rounded-full" style="width:65%"></div></div></div>
+                        <div class="skill-item"><div class="flex justify-between text-sm mb-2"><span class="text-neutral-300">VMware Workstation Pro</span><span class="text-neutral-500 font-mono text-xs">85%</span></div><div class="h-1.5 bg-neutral-800 rounded-full overflow-hidden"><div class="skill-bar-fill h-full bg-gradient-to-r from-sky-500 to-sky-400 rounded-full" style="width:85%"></div></div></div>
+                    </div>
+                    <div class="mt-8 pt-6 border-t border-neutral-800">
+                        <h4 class="text-xs font-medium text-neutral-500 uppercase tracking-widest mb-4">Outils & Logiciels</h4>
+                        <div class="flex flex-wrap gap-2">
+                            <span class="px-3 py-1.5 bg-neutral-900/80 border border-neutral-800 rounded-lg text-xs text-neutral-300">Cisco Packet Tracer</span>
+                            <span class="px-3 py-1.5 bg-neutral-900/80 border border-neutral-800 rounded-lg text-xs text-neutral-300">VMware Workstation Pro</span>
+                            <span class="px-3 py-1.5 bg-neutral-900/80 border border-neutral-800 rounded-lg text-xs text-neutral-300">Suite Office</span>
+                            <span class="px-3 py-1.5 bg-neutral-900/80 border border-neutral-800 rounded-lg text-xs text-neutral-300">CapCut</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="mt-16 observe-hidden" data-observe>
+                <div class="overflow-hidden py-4">
+                    <div class="flex gap-6 whitespace-nowrap" style="animation: marquee 25s linear infinite;">
+                        <span class="text-neutral-700 font-heading text-lg">Python</span><span class="text-neutral-700">•</span>
+                        <span class="text-neutral-700 font-heading text-lg">HTML</span><span class="text-neutral-700">•</span>
+                        <span class="text-neutral-700 font-heading text-lg">CSS</span><span class="text-neutral-700">•</span>
+                        <span class="text-neutral-700 font-heading text-lg">JavaScript</span><span class="text-neutral-700">•</span>
+                        <span class="text-neutral-700 font-heading text-lg">PHP</span><span class="text-neutral-700">•</span>
+                        <span class="text-neutral-700 font-heading text-lg">WordPress</span><span class="text-neutral-700">•</span>
+                        <span class="text-neutral-700 font-heading text-lg">VMware</span><span class="text-neutral-700">•</span>
+                        <span class="text-neutral-700 font-heading text-lg">Active Directory</span><span class="text-neutral-700">•</span>
+                        <span class="text-neutral-700 font-heading text-lg">Linux</span><span class="text-neutral-700">•</span>
+                        <span class="text-neutral-700 font-heading text-lg">Docker</span><span class="text-neutral-700">•</span>
+                        <span class="text-neutral-700 font-heading text-lg">DHCP</span><span class="text-neutral-700">•</span>
+                        <span class="text-neutral-700 font-heading text-lg">DNS</span><span class="text-neutral-700">•</span>
+                        <span class="text-neutral-700 font-heading text-lg">Proxmox</span><span class="text-neutral-700">•</span>
+                        <span class="text-neutral-700 font-heading text-lg">Cisco</span><span class="text-neutral-700">•</span>
+                        <span class="text-neutral-700 font-heading text-lg">Kubernetes</span><span class="text-neutral-700">•</span>
+                        <span class="text-neutral-700 font-heading text-lg">Sécurité</span><span class="text-neutral-700">•</span>
+                        <span class="text-neutral-700 font-heading text-lg">DevOps</span><span class="text-neutral-700">•</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- ======================== -->
+    <!-- PROJECTS SECTION         -->
+    <!-- ======================== -->
+    <section id="projects" class="py-24 md:py-32 px-6 relative">
+        <div class="absolute top-1/3 right-0 w-[700px] h-[500px] bg-sky-500/4 rounded-full blur-[120px] pointer-events-none"></div>
+        <div class="max-w-6xl mx-auto relative z-10">
+            <div class="observe-hidden" data-observe>
+                <span class="section-label">// Projets</span>
+                <h2 class="font-heading text-3xl md:text-5xl font-medium tracking-tight mt-4">Machines virtuelles & veille technologique<span class="text-sky-400">.</span></h2>
+                <p class="text-neutral-500 mt-4 max-w-2xl font-light">Quatre projets réalisés dans le cadre de ma formation BTS SIO, centrés sur la virtualisation avec VMware Workstation Pro et la veille sur les évolutions du secteur.</p>
+            </div>
+
+            <div class="mt-16 grid grid-cols-1 md:grid-cols-2 gap-8">
+
+                <!-- PROJECT 1 : Infrastructure AD -->
+                <div class="project-card bg-[#050505] rounded-2xl overflow-hidden observe-hidden" data-observe>
+                    <span class="project-number">01</span>
+                    <div class="relative h-52 overflow-hidden">
+                        <img loading="lazy" src="https://picsum.photos/seed/vmware-server-rack/800/400.jpg" alt="Infrastructure Active Directory" class="project-img w-full h-full object-cover">
+                        <div class="absolute inset-0 bg-gradient-to-t from-[#050505] via-[#050505]/60 to-transparent"></div>
+                        <div class="absolute top-4 left-4 flex gap-2">
+                            <span class="project-tag px-2.5 py-1 bg-black/60 backdrop-blur-sm border border-neutral-700 rounded text-[11px] text-sky-400 font-medium">VMware</span>
+                            <span class="project-tag px-2.5 py-1 bg-black/60 backdrop-blur-sm border border-neutral-700 rounded text-[11px] text-neutral-300 font-medium">Active Directory</span>
+                        </div>
+                    </div>
+                    <div class="p-8">
+                        <h3 class="font-heading text-xl font-medium tracking-tight text-white pr-16">Infrastructure réseau Windows Server sur VM</h3>
+                        <p class="text-neutral-500 text-sm mt-2">Déploiement complet d'un domaine Active Directory</p>
+
+                        <div class="mt-5 bg-neutral-900/80 border border-neutral-800 rounded-xl p-4 overflow-hidden">
+                            <div class="vm-terminal">
+                                <div><span class="prompt">PS C:\&gt;</span> Install-WindowsFeature -Name AD-Domain-Services</div>
+                                <div class="output">  Installing AD-Domain-Services...</div>
+                                <div class="success">  ✓ Active Directory Domain Services installed</div>
+                                <div><span class="prompt">PS C:\&gt;</span> Install-ADDSDomain -DomainName "sio.local"</div>
+                                <div class="output">  Creating domain sio.local...</div>
+                                <div class="success">  ✓ Domain controller promoted successfully</div>
+                                <div><span class="prompt">PS C:\&gt;</span> Add-DhcpServerV4Scope -Name "LAN-Scope"</div>
+                                <div class="success">  ✓ DHCP scope 192.168.1.100-200 active</div>
+                            </div>
+                        </div>
+
+                        <div class="mt-5 space-y-2">
+                            <div class="flex items-start gap-2.5">
+                                <i data-lucide="check" class="w-3.5 h-3.5 text-sky-400 mt-0.5 flex-shrink-0"></i>
+                                <p class="text-neutral-400 text-xs leading-relaxed">Création d'une VM Windows Server 2022 avec 4 Go RAM, 2 vCPU</p>
+                            </div>
+                            <div class="flex items-start gap-2.5">
+                                <i data-lucide="check" class="w-3.5 h-3.5 text-sky-400 mt-0.5 flex-shrink-0"></i>
+                                <p class="text-neutral-400 text-xs leading-relaxed">Installation et configuration d'Active Directory (AD DS) — domaine sio.local</p>
+                            </div>
+                            <div class="flex items-start gap-2.5">
+                                <i data-lucide="check" class="w-3.5 h-3.5 text-sky-400 mt-0.5 flex-shrink-0"></i>
+                                <p class="text-neutral-400 text-xs leading-relaxed">Configuration DHCP (plage 192.168.1.100–200) et DNS intégrés</p>
+                            </div>
+                            <div class="flex items-start gap-2.5">
+                                <i data-lucide="check" class="w-3.5 h-3.5 text-sky-400 mt-0.5 flex-shrink-0"></i>
+                                <p class="text-neutral-400 text-xs leading-relaxed">Création d'OU, utilisateurs et politiques de groupe (GPO)</p>
+                            </div>
+                            <div class="flex items-start gap-2.5">
+                                <i data-lucide="check" class="w-3.5 h-3.5 text-sky-400 mt-0.5 flex-shrink-0"></i>
+                                <p class="text-neutral-400 text-xs leading-relaxed">Jointure d'une VM Windows 11 cliente au domaine</p>
+                            </div>
+                        </div>
+
+                        <div class="mt-6 flex items-center gap-2 text-sky-400 text-sm font-medium">
+                            <span>Voir le détail</span>
+                            <i data-lucide="arrow-right" class="w-4 h-4 project-arrow"></i>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- PROJECT 2 : Serveur Web Linux -->
+                <div class="project-card bg-[#050505] rounded-2xl overflow-hidden observe-hidden" data-observe>
+                    <span class="project-number">02</span>
+                    <div class="relative h-52 overflow-hidden">
+                        <img loading="lazy" src="https://picsum.photos/seed/linux-terminal-dark/800/400.jpg" alt="Serveur Web Linux" class="project-img w-full h-full object-cover">
+                        <div class="absolute inset-0 bg-gradient-to-t from-[#050505] via-[#050505]/60 to-transparent"></div>
+                        <div class="absolute top-4 left-4 flex gap-2">
+                            <span class="project-tag px-2.5 py-1 bg-black/60 backdrop-blur-sm border border-neutral-700 rounded text-[11px] text-sky-400 font-medium">VMware</span>
+                            <span class="project-tag px-2.5 py-1 bg-black/60 backdrop-blur-sm border border-neutral-700 rounded text-[11px] text-neutral-300 font-medium">Ubuntu Server</span>
+                        </div>
+                    </div>
+                    <div class="p-8">
+                        <h3 class="font-heading text-xl font-medium tracking-tight text-white pr-16">Serveur web LAMP hébergé sur machine virtuelle Linux</h3>
+                        <p class="text-neutral-500 text-sm mt-2">Installation d'un environnement web complet sous Ubuntu Server</p>
+
+                        <div class="mt-5 bg-neutral-900/80 border border-neutral-800 rounded-xl p-4 overflow-hidden">
+                            <div class="vm-terminal">
+                                <div><span class="prompt">$</span> sudo apt update && sudo apt install apache2</div>
+                                <div class="success">  ✓ Apache2 installed — running on port 80</div>
+                                <div><span class="prompt">$</span> sudo apt install mysql-server php libapache2-mod-php</div>
+                                <div class="output">  Installing MySQL 8.0 + PHP 8.3...</div>
+                                <div class="success">  ✓ LAMP stack ready</div>
+                                <div><span class="prompt">$</span> sudo systemctl status apache2 mysql</div>
+                                <div class="success">  ● apache2.service — active (running)</div>
+                                <div class="success">  ● mysql.service  — active (running)</div>
+                            </div>
+                        </div>
+
+                        <div class="mt-5 space-y-2">
+                            <div class="flex items-start gap-2.5">
+                                <i data-lucide="check" class="w-3.5 h-3.5 text-sky-400 mt-0.5 flex-shrink-0"></i>
+                                <p class="text-neutral-400 text-xs leading-relaxed">Déploiement d'une VM Ubuntu Server 22.04 LTS (2 Go RAM, 2 vCPU)</p>
+                            </div>
+                            <div class="flex items-start gap-2.5">
+                                <i data-lucide="check" class="w-3.5 h-3.5 text-sky-400 mt-0.5 flex-shrink-0"></i>
+                                <p class="text-neutral-400 text-xs leading-relaxed">Installation de la stack LAMP : Apache2, MySQL, PHP 8.3</p>
+                            </div>
+                            <div class="flex items-start gap-2.5">
+                                <i data-lucide="check" class="w-3.5 h-3.5 text-sky-400 mt-0.5 flex-shrink-0"></i>
+                                <p class="text-neutral-400 text-xs leading-relaxed">Configuration des VirtualHosts pour héberger un site PHP</p>
+                            </div>
+                            <div class="flex items-start gap-2.5">
+                                <i data-lucide="check" class="w-3.5 h-3.5 text-sky-400 mt-0.5 flex-shrink-0"></i>
+                                <p class="text-neutral-400 text-xs leading-relaxed">Mise en place du pare-feu UFW (ports 22, 80, 443)</p>
+                            </div>
+                            <div class="flex items-start gap-2.5">
+                                <i data-lucide="check" class="w-3.5 h-3.5 text-sky-400 mt-0.5 flex-shrink-0"></i>
+                                <p class="text-neutral-400 text-xs leading-relaxed">Test d'accès depuis la VM hôte via réseau NAT VMware</p>
+                            </div>
+                        </div>
+
+                        <div class="mt-6 flex items-center gap-2 text-sky-400 text-sm font-medium">
+                            <span>Voir le détail</span>
+                            <i data-lucide="arrow-right" class="w-4 h-4 project-arrow"></i>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- PROJECT 3 : Veille VMware vs Hyper-V vs Proxmox -->
+                <div class="project-card bg-[#050505] rounded-2xl overflow-hidden observe-hidden" data-observe>
+                    <span class="project-number">03</span>
+                    <div class="relative h-52 overflow-hidden">
+                        <img loading="lazy" src="https://picsum.photos/seed/technology-comparison-chart/800/400.jpg" alt="Veille technologique virtualisation" class="project-img w-full h-full object-cover">
+                        <div class="absolute inset-0 bg-gradient-to-t from-[#050505] via-[#050505]/60 to-transparent"></div>
+                        <div class="absolute top-4 left-4 flex gap-2">
+                            <span class="project-tag px-2.5 py-1 bg-black/60 backdrop-blur-sm border border-neutral-700 rounded text-[11px] text-yellow-400 font-medium">Veille</span>
+                            <span class="project-tag px-2.5 py-1 bg-black/60 backdrop-blur-sm border border-neutral-700 rounded text-[11px] text-neutral-300 font-medium">Comparatif</span>
+                        </div>
+                    </div>
+                    <div class="p-8">
+                        <h3 class="font-heading text-xl font-medium tracking-tight text-white pr-16">Veille technologique : VMware vs Hyper-V vs Proxmox VE</h3>
+                        <p class="text-neutral-500 text-sm mt-2">Analyse comparative des solutions de virtualisation du marché</p>
+
+                        <!-- Comparison Table -->
+                        <div class="mt-5 bg-neutral-900/80 border border-neutral-800 rounded-xl overflow-hidden">
+                            <table class="w-full text-[11px]">
+                                <thead>
+                                    <tr class="border-b border-neutral-800">
+                                        <th class="text-left p-3 text-neutral-500 font-medium">Critère</th>
+                                        <th class="text-center p-3 text-sky-400 font-medium">VMware</th>
+                                        <th class="text-center p-3 text-blue-400 font-medium">Hyper-V</th>
+                                        <th class="text-center p-3 text-orange-400 font-medium">Proxmox</th>
+                                    </tr>
+                                </thead>
+                                <tbody class="text-neutral-400">
+                                    <tr class="border-b border-neutral-800/50">
+                                        <td class="p-3">Coût</td>
+                                        <td class="p-3 text-center text-red-400">Payant</td>
+                                        <td class="p-3 text-center text-green-400">Gratuit</td>
+                                        <td class="p-3 text-center text-green-400">Gratuit</td>
+                                    </tr>
+                                    <tr class="border-b border-neutral-800/50">
+                                        <td class="p-3">Performance</td>
+                                        <td class="p-3 text-center">★★★★★</td>
+                                        <td class="p-3 text-center">★★★★☆</td>
+                                        <td class="p-3 text-center">★★★★☆</td>
+                                    </tr>
+                                    <tr class="border-b border-neutral-800/50">
+                                        <td class="p-3">Facilité</td>
+                                        <td class="p-3 text-center">★★★★★</td>
+                                        <td class="p-3 text-center">★★★☆☆</td>
+                                        <td class="p-3 text-center">★★★★☆</td>
+                                    </tr>
+                                    <tr>
+                                        <td class="p-3">Communauté</td>
+                                        <td class="p-3 text-center">★★★★☆</td>
+                                        <td class="p-3 text-center">★★★★☆</td>
+                                        <td class="p-3 text-center">★★★★★</td>
+                                    </tr>
+                                </tbody>
+                            </table>
+                        </div>
+
+                        <div class="mt-5 space-y-2">
+                            <div class="flex items-start gap-2.5">
+                                <i data-lucide="check" class="w-3.5 h-3.5 text-sky-400 mt-0.5 flex-shrink-0"></i>
+                                <p class="text-neutral-400 text-xs leading-relaxed">Recherche et synthèse d'articles techniques (2025-2026)</p>
+                            </div>
+                            <div class="flex items-start gap-2.5">
+                                <i data-lucide="check" class="w-3.5 h-3.5 text-sky-400 mt-0.5 flex-shrink-0"></i>
+                                <p class="text-neutral-400 text-xs leading-relaxed">Tests pratiques des trois hyperviseurs en VM</p>
+                            </div>
+                            <div class="flex items-start gap-2.5">
+                                <i data-lucide="check" class="w-3.5 h-3.5 text-sky-400 mt-0.5 flex-shrink-0"></i>
+                                <p class="text-neutral-400 text-xs leading-relaxed">Rédaction d'un rapport de 12 pages avec recommandations</p>
+                            </div>
+                            <div class="flex items-start gap-2.5">
+                                <i data-lucide="check" class="w-3.5 h-3.5 text-sky-400 mt-0.5 flex-shrink-0"></i>
+                                <p class="text-neutral-400 text-xs leading-relaxed">Analyse de l'impact du rachat VMware par Broadcom sur le marché</p>
+                            </div>
+                        </div>
+
+                        <div class="mt-6 flex items-center gap-2 text-sky-400 text-sm font-medium">
+                            <span>Voir le détail</span>
+                            <i data-lucide="arrow-right" class="w-4 h-4 project-arrow"></i>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- PROJECT 4 : Veille Docker vs VM -->
+                <div class="project-card bg-[#050505] rounded-2xl overflow-hidden observe-hidden" data-observe>
+                    <span class="project-number">04</span>
+                    <div class="relative h-52 overflow-hidden">
+                        <img loading="lazy" src="https://picsum.photos/seed/docker-containers-blue/800/400.jpg" alt="Docker vs Machines Virtuelles" class="project-img w-full h-full object-cover">
+                        <div class="absolute inset-0 bg-gradient-to-t from-[#050505] via-[#050505]/60 to-transparent"></div>
+                        <div class="absolute top-4 left-4 flex gap-2">
+                            <span class="project-tag px-2.5 py-1 bg-black/60 backdrop-blur-sm border border-neutral-700 rounded text-[11px] text-yellow-400 font-medium">Veille</span>
+                            <span class="project-tag px-2.5 py-1 bg-black/60 backdrop-blur-sm border border-neutral-700 rounded text-[11px] text-neutral-300 font-medium">Docker</span>
+                            <span class="project-tag px-2.5 py-1 bg-black/60 backdrop-blur-sm border border-neutral-700 rounded text-[11px] text-neutral-300 font-medium">Conteneurs</span>
+                        </div>
+                    </div>
+                    <div class="p-8">
+                        <h3 class="font-heading text-xl font-medium tracking-tight text-white pr-16">Veille : Conteneurs Docker vs Machines Virtuelles — Quand choisir quoi ?</h3>
+                        <p class="text-neutral-500 text-sm mt-2">Étude comparative et cas d'usage concrets entre conteneurisation et virtualisation</p>
+
+                        <div class="mt-5 bg-neutral-900/80 border border-neutral-800 rounded-xl p-4 overflow-hidden">
+                            <div class="vm-terminal">
+                                <div><span class="prompt">$</span> docker pull nginx:alpine</div>
+                                <div class="output">  Digest: sha256:a7e5e35...d72c</div>
+                                <div class="success">  ✓ Pulled in 3.2s (8.4 MB vs 1.2 GB VM)</div>
+                                <div><span class="prompt">$</span> docker run -d -p 8080:80 nginx:alpine</div>
+                                <div class="success">  ✓ Container started — 0.3s boot time</div>
+                                <div><span class="prompt">$</span> docker stats nginx-container</div>
+                                <div class="output">  CPU: 0.1% | MEM: 12MB | NET: I/O low</div>
+                                <div class="warning">  ⚡ 50x lighter than equivalent VM</div>
+                            </div>
+                        </div>
+
+                        <div class="mt-5 space-y-2">
+                            <div class="flex items-start gap-2.5">
+                                <i data-lucide="check" class="w-3.5 h-3.5 text-sky-400 mt-0.5 flex-shrink-0"></i>
+                                <p class="text-neutral-400 text-xs leading-relaxed">Étude de l'architecture conteneur vs hyperviseur (kernel sharing vs isolation complète)</p>
+                            </div>
+                            <div class="flex items-start gap-2.5">
+                                <i data-lucide="check" class="w-3.5 h-3.5 text-sky-400 mt-0.5 flex-shrink-0"></i>
+                                <p class="text-neutral-400 text-xs leading-relaxed">Déploiement de conteneurs Docker (Nginx, MySQL, PHP-FPM) vs mêmes services en VM</p>
+                            </div>
+                            <div class="flex items-start gap-2.5">
+                                <i data-lucide="check" class="w-3.5 h-3.5 text-sky-400 mt-0.5 flex-shrink-0"></i>
+                                <p class="text-neutral-400 text-xs leading-relaxed">Benchmarks : consommation RAM, temps de démarrage, taille disque</p>
+                            </div>
+                            <div class="flex items-start gap-2.5">
+                                <i data-lucide="check" class="w-3.5 h-3.5 text-sky-400 mt-0.5 flex-shrink-0"></i>
+                                <p class="text-neutral-400 text-xs leading-relaxed">Matrice de décision : quand utiliser VM, quand utiliser Docker, quand combiner</p>
+                            </div>
+                            <div class="flex items-start gap-2.5">
+                                <i data-lucide="check" class="w-3.5 h-3.5 text-sky-400 mt-0.5 flex-shrink-0"></i>
+                                <p class="text-neutral-400 text-xs leading-relaxed">Veille sur Kubernetes, Podman et les tendances 2026 (WebAssembly, unikernels)</p>
+                            </div>
+                        </div>
+
+                        <div class="mt-6 flex items-center gap-2 text-sky-400 text-sm font-medium">
+                            <span>Voir le détail</span>
+                            <i data-lucide="arrow-right" class="w-4 h-4 project-arrow"></i>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Project Stats Banner -->
+            <div class="mt-16 observe-hidden" data-observe>
+                <div class="card-hover bg-[#050505] rounded-2xl p-8 md:p-10">
+                    <div class="grid grid-cols-2 md:grid-cols-4 gap-8">
+                        <div class="text-center">
+                            <div class="w-12 h-12 rounded-xl bg-sky-400/10 flex items-center justify-center mx-auto mb-3">
+                                <i data-lucide="monitor" class="w-5 h-5 text-sky-400"></i>
+                            </div>
+                            <div class="font-heading text-2xl font-medium text-white">8+</div>
+                            <div class="text-neutral-500 text-xs mt-1">VMs déployées</div>
+                        </div>
+                        <div class="text-center">
+                            <div class="w-12 h-12 rounded-xl bg-sky-400/10 flex items-center justify-center mx-auto mb-3">
+                                <i data-lucide="search" class="w-5 h-5 text-sky-400"></i>
+                            </div>
+                            <div class="font-heading text-2xl font-medium text-white">25+</div>
+                            <div class="text-neutral-500 text-xs mt-1">Sources veillées</div>
+                        </div>
+                        <div class="text-center">
+                            <div class="w-12 h-12 rounded-xl bg-sky-400/10 flex items-center justify-center mx-auto mb-3">
+                                <i data-lucide="file-text" class="w-5 h-5 text-sky-400"></i>
+                            </div>
+                            <div class="font-heading text-2xl font-medium text-white">24</div>
+                            <div class="text-neutral-500 text-xs mt-1">Pages de rapports</div>
+                        </div>
+                        <div class="text-center">
+                            <div class="w-12 h-12 rounded-xl bg-sky-400/10 flex items-center justify-center mx-auto mb-3">
+                                <i data-lucide="layers" class="w-5 h-5 text-sky-400"></i>
+                            </div>
+                            <div class="font-heading text-2xl font-medium text-white">3</div>
+                            <div class="text-neutral-500 text-xs mt-1">Hyperviseurs testés</div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Experience -->
+    <section id="experience" class="py-24 md:py-32 px-6 relative">
+        <div class="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[600px] h-[400px] bg-sky-500/3 rounded-full blur-[120px] pointer-events-none"></div>
+        <div class="max-w-6xl mx-auto relative z-10">
+            <div class="observe-hidden" data-observe>
+                <span class="section-label">// Parcours</span>
+                <h2 class="font-heading text-3xl md:text-5xl font-medium tracking-tight mt-4">Expériences professionnelles<span class="text-sky-400">.</span></h2>
+            </div>
+            <div class="mt-16 max-w-3xl">
+                <div class="relative pl-12 pb-16 observe-hidden" data-observe>
+                    <div class="timeline-line"></div>
+                    <div class="absolute left-[13px] top-[6px]"><div class="timeline-dot"></div></div>
+                    <div class="card-hover bg-[#050505] rounded-2xl p-8">
+                        <div class="flex flex-wrap items-center gap-3 mb-4">
+                            <span class="px-3 py-1 bg-sky-400/10 text-sky-400 text-xs font-medium rounded-full border border-sky-400/20">Stage</span>
+                            <span class="text-neutral-500 text-xs font-mono">2022 — 3 jours</span>
+                        </div>
+                        <h3 class="font-heading text-xl md:text-2xl font-medium tracking-tight text-white">Mairie de Rennes</h3>
+                        <p class="text-neutral-500 text-sm mt-1">Service Informatique</p>
+                        <div class="mt-6 space-y-3">
+                            <div class="flex items-start gap-3"><i data-lucide="check-circle-2" class="w-4 h-4 text-sky-400 mt-0.5 flex-shrink-0"></i><p class="text-neutral-400 text-sm">Accueil des usagers et assistance pour des problèmes simples (logiciels, matériels)</p></div>
+                            <div class="flex items-start gap-3"><i data-lucide="check-circle-2" class="w-4 h-4 text-sky-400 mt-0.5 flex-shrink-0"></i><p class="text-neutral-400 text-sm">Découverte des procédures internes et respect des consignes de sécurité informatique</p></div>
+                            <div class="flex items-start gap-3"><i data-lucide="check-circle-2" class="w-4 h-4 text-sky-400 mt-0.5 flex-shrink-0"></i><p class="text-neutral-400 text-sm">Mise sous plis des vœux pour le maire</p></div>
+                            <div class="flex items-start gap-3"><i data-lucide="check-circle-2" class="w-4 h-4 text-sky-400 mt-0.5 flex-shrink-0"></i><p class="text-neutral-400 text-sm">Participation à l'installation et maintenance de matériel informatique</p></div>
+                            <div class="flex items-start gap-3"><i data-lucide="check-circle-2" class="w-4 h-4 text-sky-400 mt-0.5 flex-shrink-0"></i><p class="text-neutral-400 text-sm">Observation et apprentissage des opérations de dépannage et configuration réseau</p></div>
+                            <div class="flex items-start gap-3"><i data-lucide="check-circle-2" class="w-4 h-4 text-sky-400 mt-0.5 flex-shrink-0"></i><p class="text-neutral-400 text-sm">Découverte du fonctionnement d'un service informatique en entreprise</p></div>
+                        </div>
+                        <div class="mt-6 flex flex-wrap gap-2">
+                            <span class="px-2.5 py-1 bg-neutral-900 border border-neutral-800 rounded text-[11px] text-neutral-400">Support utilisateur</span>
+                            <span class="px-2.5 py-1 bg-neutral-900 border border-neutral-800 rounded text-[11px] text-neutral-400">Maintenance matériel</span>
+                            <span class="px-2.5 py-1 bg-neutral-900 border border-neutral-800 rounded text-[11px] text-neutral-400">Réseau</span>
+                            <span class="px-2.5 py-1 bg-neutral-900 border border-neutral-800 rounded text-[11px] text-neutral-400">Sécurité</span>
+                        </div>
+                    </div>
+                </div>
+                <div class="relative pl-12 observe-hidden" data-observe>
+                    <div class="absolute left-[13px] top-[6px]"><div class="timeline-dot-muted"></div></div>
+                    <div class="card-hover bg-[#050505] rounded-2xl p-8">
+                        <div class="flex flex-wrap items-center gap-3 mb-4">
+                            <span class="px-3 py-1 bg-sky-400/10 text-sky-400 text-xs font-medium rounded-full border border-sky-400/20">Stage</span>
+                            <span class="text-neutral-500 text-xs font-mono">15 juin — 23 juillet 2026</span>
+                        </div>
+                        <h3 class="font-heading text-xl md:text-2xl font-medium tracking-tight text-white">Stage informatique chez GES Atlantic à Nantes</h3>
+                        <p class="text-neutral-500 text-sm mt-1">Support des outils métier, gestion du parc et optimisation des process informatiques.</p>
+                        <div class="mt-6 space-y-3 text-neutral-400 text-sm leading-relaxed">
+                            <p>Compétences visées : sécurité, gestion de base de données SQL Server, administration système, réseaux et télécoms, développement, gestion de parc informatique et maintenance.</p>
+                            <p>Activités confiées : connaissance de la gestion d'un centre de contact, maîtrise des outils et de leur développement, découverte de l'IA, et gestion/mise en forme des fichiers de contact.</p>
+                            <p>Projet associé : Ouestcall, mené par le service informatique de l'entreprise avec l'appui des stagiaires.</p>
+                        </div>
+                        <div class="mt-6 flex flex-wrap gap-2">
+                            <span class="px-2.5 py-1 bg-neutral-900 border border-neutral-800 rounded text-[11px] text-neutral-400">Support matériel</span>
+                            <span class="px-2.5 py-1 bg-neutral-900 border border-neutral-800 rounded text-[11px] text-neutral-400">Automatisation</span>
+                            <span class="px-2.5 py-1 bg-neutral-900 border border-neutral-800 rounded text-[11px] text-neutral-400">Centre de contact</span>
+                            <span class="px-2.5 py-1 bg-neutral-900 border border-neutral-800 rounded text-[11px] text-neutral-400">IA et fichiers de contact</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Formation -->
+    <section id="formation" class="py-24 md:py-32 px-6 relative">
+        <div class="max-w-6xl mx-auto relative z-10">
+            <div class="observe-hidden" data-observe>
+                <span class="section-label">// Formation</span>
+                <h2 class="font-heading text-3xl md:text-5xl font-medium tracking-tight mt-4">Mon parcours académique<span class="text-sky-400">.</span></h2>
+            </div>
+            <div class="mt-16 grid grid-cols-1 md:grid-cols-2 gap-8">
+                <div class="card-hover bg-[#050505] rounded-2xl p-8 relative overflow-hidden observe-hidden" data-observe>
+                    <div class="absolute top-0 right-0 w-40 h-40 bg-sky-400/5 rounded-full blur-[60px] pointer-events-none"></div>
+                    <div class="relative z-10">
+                        <div class="flex items-start justify-between mb-6">
+                            <div class="w-14 h-14 rounded-2xl bg-sky-400/10 flex items-center justify-center"><i data-lucide="laptop" class="w-7 h-7 text-sky-400"></i></div>
+                            <span class="px-3 py-1 bg-sky-400/10 text-sky-400 text-xs font-medium rounded-full border border-sky-400/20 animate-pulse">En cours</span>
+                        </div>
+                        <h3 class="font-heading text-xl font-medium tracking-tight">BTS SIO</h3>
+                        <p class="text-neutral-500 text-sm mt-1">Services Informatiques aux Organisations</p>
+                        <div class="mt-4 flex items-center gap-2 text-neutral-400 text-sm"><i data-lucide="building-2" class="w-4 h-4 text-sky-400"></i><span>AFTEC Rennes</span></div>
+                        <div class="mt-2 flex items-center gap-2 text-neutral-400 text-sm"><i data-lucide="calendar" class="w-4 h-4 text-sky-400"></i><span>2025 — 2027</span></div>
+                        <div class="mt-6 pt-6 border-t border-neutral-800">
+                            <p class="text-neutral-400 text-sm font-light leading-relaxed">Formation couvrant le développement web et logiciel, l'administration des systèmes et réseaux, la gestion de projets informatiques et la cybersécurité. Projets pratiques sur machines virtuelles.</p>
+                        </div>
+                    </div>
+                </div>
+                <div class="card-hover bg-[#050505] rounded-2xl p-8 relative overflow-hidden observe-hidden" data-observe>
+                    <div class="absolute top-0 right-0 w-40 h-40 bg-neutral-400/5 rounded-full blur-[60px] pointer-events-none"></div>
+                    <div class="relative z-10">
+                        <div class="flex items-start justify-between mb-6">
+                            <div class="w-14 h-14 rounded-2xl bg-neutral-800/50 flex items-center justify-center"><i data-lucide="flask-conical" class="w-7 h-7 text-neutral-400"></i></div>
+                            <span class="px-3 py-1 bg-neutral-800 text-neutral-400 text-xs font-medium rounded-full border border-neutral-700">Obtenu</span>
+                        </div>
+                        <h3 class="font-heading text-xl font-medium tracking-tight">Baccalauréat STI2D</h3>
+                        <p class="text-neutral-500 text-sm mt-1">Sciences et Technologies de l'Industrie et du Développement Durable</p>
+                        <div class="mt-4 flex items-center gap-2 text-neutral-400 text-sm"><i data-lucide="building-2" class="w-4 h-4 text-neutral-500"></i><span>Lycée Pierre Mendès France</span></div>
+                        <div class="mt-2 flex items-center gap-2 text-neutral-400 text-sm"><i data-lucide="calendar" class="w-4 h-4 text-neutral-500"></i><span>2022 — 2026</span></div>
+                        <div class="mt-6 pt-6 border-t border-neutral-800">
+                            <p class="text-neutral-400 text-sm font-light leading-relaxed">Formation technologique axée sur l'innovation, l'ingénierie et le développement durable. Initiation aux systèmes informatiques et à la programmation.</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Contact -->
+    <section id="contact" class="py-24 md:py-32 px-6 relative">
+        <div class="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[800px] h-[500px] bg-sky-500/5 rounded-full blur-[120px] pointer-events-none"></div>
+        <div class="max-w-6xl mx-auto relative z-10">
+            <div class="text-center observe-hidden" data-observe>
+                <span class="section-label">// Contact</span>
+                <h2 class="font-heading text-3xl md:text-5xl font-medium tracking-tight mt-4">Travaillons ensemble<span class="text-sky-400">.</span></h2>
+                <p class="text-neutral-500 mt-4 max-w-lg mx-auto font-light">Je suis actuellement en stage informatique chez GES Atlantic à Nantes du 15 juin au 23 juillet 2026. Contactez-moi pour suivre mon projet ou pour toute collaboration.</p>
+            </div>
+            <div class="mt-16 max-w-2xl mx-auto">
+                <div class="grid grid-cols-1 sm:grid-cols-3 gap-4 mb-12 observe-hidden" data-observe>
+                    <a href="mailto:lahcenmze@gmail.com" class="card-hover bg-[#050505] rounded-xl p-6 text-center group cursor-pointer">
+                        <div class="w-12 h-12 rounded-xl bg-sky-400/10 flex items-center justify-center mx-auto mb-3 group-hover:bg-sky-400/20 transition-colors"><i data-lucide="mail" class="w-5 h-5 text-sky-400"></i></div>
+                        <p class="text-xs text-neutral-500 mb-1">Email</p>
+                        <p class="text-sm text-neutral-300 break-all">lahcenmze@gmail.com</p>
+                    </a>
+                    <a href="tel:0774790080" class="card-hover bg-[#050505] rounded-xl p-6 text-center group cursor-pointer">
+                        <div class="w-12 h-12 rounded-xl bg-sky-400/10 flex items-center justify-center mx-auto mb-3 group-hover:bg-sky-400/20 transition-colors"><i data-lucide="phone" class="w-5 h-5 text-sky-400"></i></div>
+                        <p class="text-xs text-neutral-500 mb-1">Téléphone</p>
+                        <p class="text-sm text-neutral-300">07 74 79 00 80</p>
+                    </a>
+                    <div class="card-hover bg-[#050505] rounded-xl p-6 text-center group cursor-default">
+                        <div class="w-12 h-12 rounded-xl bg-sky-400/10 flex items-center justify-center mx-auto mb-3 group-hover:bg-sky-400/20 transition-colors"><i data-lucide="map-pin" class="w-5 h-5 text-sky-400"></i></div>
+                        <p class="text-xs text-neutral-500 mb-1">Localisation</p>
+                        <p class="text-sm text-neutral-300">Rennes, 35000</p>
+                    </div>
+                </div>
+                <div class="card-hover bg-[#050505] rounded-2xl p-8 md:p-10 observe-hidden contact-glow" data-observe>
+                    <form id="contactForm" class="space-y-6">
+                        <div class="grid grid-cols-1 sm:grid-cols-2 gap-6">
+                            <div>
+                                <label for="contactName" class="block text-xs text-neutral-500 uppercase tracking-widest mb-2">Nom complet</label>
+                                <input id="contactName" name="name" type="text" placeholder="Votre nom" required class="w-full bg-neutral-900/50 border border-neutral-800 rounded-xl px-4 py-3 text-sm text-white placeholder-neutral-600 focus:outline-none focus:border-sky-400/50 transition-colors">
+                            </div>
+                            <div>
+                                <label for="contactEmail" class="block text-xs text-neutral-500 uppercase tracking-widest mb-2">Email</label>
+                                <input id="contactEmail" name="email" type="email" placeholder="votre@email.com" required class="w-full bg-neutral-900/50 border border-neutral-800 rounded-xl px-4 py-3 text-sm text-white placeholder-neutral-600 focus:outline-none focus:border-sky-400/50 transition-colors">
+                            </div>
+                        </div>
+                        <div>
+                            <label for="contactSubject" class="block text-xs text-neutral-500 uppercase tracking-widest mb-2">Objet</label>
+                            <input id="contactSubject" name="subject" type="text" placeholder="Proposition de stage, collaboration..." required class="w-full bg-neutral-900/50 border border-neutral-800 rounded-xl px-4 py-3 text-sm text-white placeholder-neutral-600 focus:outline-none focus:border-sky-400/50 transition-colors">
+                        </div>
+                        <div>
+                            <label for="contactMessage" class="block text-xs text-neutral-500 uppercase tracking-widest mb-2">Message</label>
+                            <textarea id="contactMessage" name="message" rows="5" placeholder="Décrivez votre proposition..." required class="w-full bg-neutral-900/50 border border-neutral-800 rounded-xl px-4 py-3 text-sm text-white placeholder-neutral-600 focus:outline-none focus:border-sky-400/50 transition-colors resize-none"></textarea>
+                        </div>
+                        <button type="submit" class="w-full flex items-center justify-center gap-2 px-7 py-3.5 bg-sky-400 text-black font-medium rounded-xl tracking-wide hover:bg-sky-300 transition-all duration-300 hover:scale-[1.02] sky-glow">
+                            <i data-lucide="send" class="w-4 h-4"></i>
+                            Envoyer le message
+                        </button>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </section>
+    </main>
+
+    <!-- Footer -->
+    <footer class="border-t border-neutral-800/50 py-12 px-6">
+        <div class="max-w-6xl mx-auto flex flex-col md:flex-row items-center justify-between gap-6">
+            <div class="flex items-center gap-3">
+                <span class="font-brand text-lg font-semibold"><span class="text-sky-400">L</span><span class="text-neutral-400">.</span>MS</span>
+                <span class="text-neutral-600 text-sm">—</span>
+                <span class="text-neutral-600 text-sm">Lahcen Mze Soilihi</span>
+            </div>
+            <div class="flex items-center gap-6">
+                <a href="#hero" class="text-neutral-500 text-sm hover:text-sky-400 transition-colors">Accueil</a>
+                <a href="#about" class="text-neutral-500 text-sm hover:text-sky-400 transition-colors">À propos</a>
+                <a href="#projects" class="text-neutral-500 text-sm hover:text-sky-400 transition-colors">Projets</a>
+                <a href="#contact" class="text-neutral-500 text-sm hover:text-sky-400 transition-colors">Contact</a>
+            </div>
+            <p class="text-neutral-600 text-xs">© 2026 — Tous droits réservés</p>
+        </div>
+    </footer>
+
+    <!-- Toast -->
+    <div id="toast" class="toast fixed bottom-8 left-1/2 -translate-x-1/2 z-50 px-6 py-3 bg-neutral-900 border border-sky-400/30 rounded-full flex items-center gap-3" role="status" aria-live="polite" aria-atomic="true">
+        <i data-lucide="check-circle-2" class="w-4 h-4 text-sky-400"></i>
+        <span class="text-sm text-neutral-300">Message envoyé avec succès !</span>
+    </div>
+
+    <script>
+        lucide.createIcons();
+
+        // Navbar scroll
+        const navbar = document.getElementById('navbar');
+        window.addEventListener('scroll', () => {
+            if (window.scrollY > 80) {
+                navbar.style.background = 'rgba(2,2,2,0.85)';
+                navbar.style.backdropFilter = 'blur(12px)';
+                navbar.style.borderBottom = '1px solid rgba(38,38,38,0.5)';
+            } else {
+                navbar.style.background = 'transparent';
+                navbar.style.backdropFilter = 'none';
+                navbar.style.borderBottom = '1px solid transparent';
+            }
+        });
+
+        // Mobile menu
+        const menuBtn = document.getElementById('menuBtn');
+        const closeMenuBtn = document.getElementById('closeMenu');
+        const mobileMenu = document.getElementById('mobileMenu');
+        const menuOverlay = document.getElementById('menuOverlay');
+
+        function openMenu() { mobileMenu.classList.add('open'); menuOverlay.classList.remove('hidden'); document.body.style.overflow = 'hidden'; menuBtn.setAttribute('aria-expanded', 'true'); mobileMenu.setAttribute('aria-hidden', 'false'); }
+        function closeMenu() { mobileMenu.classList.remove('open'); menuOverlay.classList.add('hidden'); document.body.style.overflow = ''; menuBtn.setAttribute('aria-expanded', 'false'); mobileMenu.setAttribute('aria-hidden', 'true'); }
+
+        menuBtn.addEventListener('click', openMenu);
+        closeMenuBtn.addEventListener('click', closeMenu);
+        menuOverlay.addEventListener('click', closeMenu);
+        document.addEventListener('keydown', (e) => { if (e.key === 'Escape' && mobileMenu.classList.contains('open')) closeMenu(); });
+        document.querySelectorAll('.mobile-link').forEach(l => l.addEventListener('click', closeMenu));
+
+        // Intersection Observer
+        const observer = new IntersectionObserver((entries) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    entry.target.classList.remove('observe-hidden');
+                    entry.target.classList.add('observe-visible');
+                    observer.unobserve(entry.target);
+                }
+            });
+        }, { threshold: 0.1, rootMargin: '0px 0px -50px 0px' });
+
+        document.querySelectorAll('[data-observe]').forEach(el => observer.observe(el));
+
+        // Active nav link
+        const sections = document.querySelectorAll('section[id]');
+        const navLinks = document.querySelectorAll('.nav-link');
+        window.addEventListener('scroll', () => {
+            let current = '';
+            sections.forEach(s => { if (window.scrollY >= s.offsetTop - 200) current = s.id; });
+            navLinks.forEach(l => { l.classList.remove('active'); if (l.getAttribute('href') === '#' + current) l.classList.add('active'); });
+        });
+
+        // Contact form
+        document.getElementById('contactForm').addEventListener('submit', (e) => {
+            e.preventDefault();
+            const toast = document.getElementById('toast');
+            toast.classList.add('show');
+            e.target.reset();
+            setTimeout(() => toast.classList.remove('show'), 3000);
+        });
+
+        // Smooth scroll
+        document.querySelectorAll('a[href^="#"]').forEach(a => {
+            a.addEventListener('click', function(e) {
+                e.preventDefault();
+                const t = document.querySelector(this.getAttribute('href'));
+                if (t) t.scrollIntoView({ behavior: 'smooth', block: 'start' });
+            });
+        });
+
+        // Skill bars
+        const skillSection = document.getElementById('skills');
+        let skillAnimated = false;
+        const skillObs = new IntersectionObserver((entries) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting && !skillAnimated) {
+                    skillAnimated = true;
+                    document.querySelectorAll('.skill-bar-fill').forEach((bar, i) => { bar.style.animationDelay = `${i * 100}ms`; });
+                }
+            });
+        }, { threshold: 0.2 });
+        if (skillSection) skillObs.observe(skillSection);
+
+        // Cursor glow (desktop)
+        if (window.matchMedia('(min-width: 768px)').matches) {
+            const glow = document.createElement('div');
+            glow.style.cssText = 'position:fixed;width:300px;height:300px;border-radius:50%;background:radial-gradient(circle,rgba(56,189,248,0.04),transparent 70%);pointer-events:none;z-index:30;transform:translate(-50%,-50%);';
+            document.body.appendChild(glow);
+            document.addEventListener('mousemove', e => { glow.style.left = e.clientX + 'px'; glow.style.top = e.clientY + 'px'; });
+        }
+    </script>
+</body>
+</html>
