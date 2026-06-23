@@ -8,15 +8,6 @@
 // 1. INITIALIZATION
 // ===================================================
 
-/**
- * Initialize Lucide icons on page load
- */
-function initializeIcons() {
-    if (typeof lucide !== 'undefined') {
-        lucide.createIcons();
-    }
-}
-
 // ===================================================
 // 2. NAVBAR STYLING ON SCROLL
 // ===================================================
@@ -276,7 +267,6 @@ function initCursorGlow() {
  * Initialize all components when DOM is ready
  */
 document.addEventListener('DOMContentLoaded', () => {
-    initializeIcons();
     initNavbarScroll();
     initMobileMenu();
     initIntersectionObserver();
