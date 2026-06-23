@@ -1,0 +1,507 @@
+/**
+ * Portfolio Lahcen Mze Soilihi - Styles CSS
+ * Structure modulaire avec animations et design système
+ * Generated: 2026-06-23
+ */
+
+/* ============================================
+   1. RESET & BASE STYLES
+   ============================================ */
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+html {
+    scroll-behavior: smooth;
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+}
+
+body {
+    background: #020202;
+    color: #fff;
+    font-family: 'Inter', sans-serif;
+    overflow-x: hidden;
+    line-height: 1.5;
+}
+
+/* ============================================
+   2. FOCUS & ACCESSIBILITY
+   ============================================ */
+:focus-visible {
+    outline: 2px solid #38bdf8;
+    outline-offset: 3px;
+}
+
+.skip-link {
+    position: absolute;
+    top: -40px;
+    left: 1rem;
+    background: rgba(0, 0, 0, 0.85);
+    color: #fff;
+    padding: 0.75rem 1rem;
+    border-radius: 9999px;
+    z-index: 60;
+    transition: top 200ms ease;
+}
+
+.skip-link:focus {
+    top: 1rem;
+}
+
+@media (prefers-reduced-motion: reduce) {
+    *,
+    *::before,
+    *::after {
+        animation-duration: 0.01ms !important;
+        animation-iteration-count: 1 !important;
+        transition-duration: 0.01ms !important;
+        scroll-behavior: auto !important;
+    }
+}
+
+/* ============================================
+   3. ANIMATIONS
+   ============================================ */
+@keyframes fadeInUp {
+    from {
+        opacity: 0;
+        transform: translateY(30px);
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+@keyframes float {
+    0%,
+    100% {
+        transform: translateY(0px);
+    }
+    50% {
+        transform: translateY(-10px);
+    }
+}
+
+@keyframes ping {
+    75%,
+    100% {
+        transform: scale(2);
+        opacity: 0;
+    }
+}
+
+@keyframes progressFill {
+    from {
+        width: 0;
+    }
+}
+
+@keyframes shimmer {
+    0% {
+        background-position: -200% 0;
+    }
+    100% {
+        background-position: 200% 0;
+    }
+}
+
+@keyframes rotateGlow {
+    0% {
+        transform: rotate(0deg);
+    }
+    100% {
+        transform: rotate(360deg);
+    }
+}
+
+@keyframes marquee {
+    0% {
+        transform: translateX(0);
+    }
+    100% {
+        transform: translateX(-50%);
+    }
+}
+
+@keyframes typewriter {
+    from {
+        max-height: 0;
+        opacity: 0;
+    }
+    to {
+        max-height: 200px;
+        opacity: 1;
+    }
+}
+
+@keyframes pulseRing {
+    0% {
+        transform: scale(1);
+        opacity: 0.5;
+    }
+    100% {
+        transform: scale(1.5);
+        opacity: 0;
+    }
+}
+
+/* ============================================
+   4. UTILITY CLASSES
+   ============================================ */
+.animate-fade-up {
+    animation: fadeInUp 0.8s cubic-bezier(0.2, 0.8, 0.2, 1) forwards;
+}
+
+.animate-float {
+    animation: float 3s ease-in-out infinite;
+}
+
+.observe-hidden {
+    opacity: 0;
+    transform: translateY(30px);
+}
+
+.observe-visible {
+    animation: fadeInUp 0.8s cubic-bezier(0.2, 0.8, 0.2, 1) forwards;
+}
+
+/* ============================================
+   5. BACKGROUND & DECORATIVE
+   ============================================ */
+.grain {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    z-index: 40;
+    pointer-events: none;
+    opacity: 0.03;
+    background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 400 400' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noiseFilter'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='4' /%3E%3C/filter%3E%3Crect width='400' height='400' filter='url(%23noiseFilter)'/%3E%3C/svg%3E");
+}
+
+.grid-bg {
+    background-image:
+        linear-gradient(to right, #222 1px, transparent 1px),
+        linear-gradient(to bottom, #222 1px, transparent 1px);
+    background-size: 40px 40px;
+    mask-image: linear-gradient(to bottom, transparent, black 30%, black 70%, transparent);
+    -webkit-mask-image: linear-gradient(to bottom, transparent, black 30%, black 70%, transparent);
+}
+
+/* ============================================
+   6. TEXT EFFECTS
+   ============================================ */
+.hero-gradient {
+    background: linear-gradient(to bottom, #FFFFFF, #E5E5E5, #737373);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
+}
+
+.sky-glow {
+    box-shadow: 0 0 20px rgba(56, 189, 248, 0.6);
+}
+
+/* ============================================
+   7. CARDS
+   ============================================ */
+.card-hover {
+    transition: all 500ms cubic-bezier(0.2, 0.8, 0.2, 1);
+    border: 1px solid #262626;
+}
+
+.card-hover:hover {
+    transform: translateY(-8px);
+    border-color: rgba(132, 204, 22, 0.3);
+    box-shadow: 0 0 50px -10px rgba(132, 204, 22, 0.3);
+}
+
+/* ============================================
+   8. PROJECT CARDS
+   ============================================ */
+.project-card {
+    transition: all 500ms cubic-bezier(0.2, 0.8, 0.2, 1);
+    border: 1px solid #262626;
+    position: relative;
+    overflow: hidden;
+}
+
+.project-card::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    height: 2px;
+    background: linear-gradient(90deg, transparent, #38bdf8, transparent);
+    opacity: 0;
+    transition: opacity 500ms;
+}
+
+.project-card:hover::before {
+    opacity: 1;
+}
+
+.project-card:hover {
+    transform: translateY(-6px);
+    border-color: rgba(132, 204, 22, 0.3);
+    box-shadow: 0 0 50px -10px rgba(132, 204, 22, 0.2);
+}
+
+.project-card .project-img {
+    transition: transform 700ms cubic-bezier(0.2, 0.8, 0.2, 1), opacity 700ms;
+    opacity: 0.7;
+}
+
+.project-card:hover .project-img {
+    transform: scale(1.05);
+    opacity: 0.9;
+}
+
+.project-card .project-arrow {
+    transition: all 300ms;
+    transform: translateX(-8px);
+    opacity: 0;
+}
+
+.project-card:hover .project-arrow {
+    transform: translateX(0);
+    opacity: 1;
+}
+
+.project-card .project-tag {
+    transition: all 300ms;
+}
+
+.project-card:hover .project-tag {
+    border-color: rgba(56, 189, 248, 0.4);
+    background: rgba(56, 189, 248, 0.08);
+}
+
+/* ============================================
+   9. TIMELINE
+   ============================================ */
+.timeline-line {
+    position: absolute;
+    left: 19px;
+    top: 48px;
+    bottom: 0;
+    width: 2px;
+    background: linear-gradient(to bottom, rgba(56, 189, 248, 0.5), #262626, transparent);
+}
+
+.timeline-dot {
+    width: 12px;
+    height: 12px;
+    border-radius: 50%;
+    background: #38bdf8;
+    box-shadow: 0 0 10px rgba(56, 189, 248, 0.6);
+    position: relative;
+    z-index: 2;
+    flex-shrink: 0;
+}
+
+.timeline-dot-muted {
+    width: 12px;
+    height: 12px;
+    border-radius: 50%;
+    background: #737373;
+    border: 2px solid #404040;
+    flex-shrink: 0;
+    position: relative;
+    z-index: 2;
+}
+
+/* ============================================
+   10. NAVIGATION
+   ============================================ */
+.nav-link {
+    position: relative;
+}
+
+.nav-link::after {
+    content: '';
+    position: absolute;
+    bottom: -4px;
+    left: 0;
+    width: 0;
+    height: 1px;
+    background: #38bdf8;
+    transition: width 300ms;
+}
+
+.nav-link:hover::after,
+.nav-link.active::after {
+    width: 100%;
+}
+
+/* ============================================
+   11. TAGS
+   ============================================ */
+.tag {
+    display: inline-flex;
+    align-items: center;
+    gap: 6px;
+    padding: 6px 14px;
+    border-radius: 9999px;
+    border: 1px solid #262626;
+    font-size: 0.75rem;
+    font-weight: 500;
+    letter-spacing: 0.05em;
+    transition: all 300ms;
+    background: rgba(23, 23, 23, 0.5);
+}
+
+.tag:hover {
+    border-color: rgba(56, 189, 248, 0.5);
+    background: rgba(56, 189, 248, 0.05);
+    color: #38bdf8;
+}
+
+/* ============================================
+   12. SCROLLBAR
+   ============================================ */
+::-webkit-scrollbar {
+    width: 6px;
+}
+
+::-webkit-scrollbar-track {
+    background: #020202;
+}
+
+::-webkit-scrollbar-thumb {
+    background: #333;
+    border-radius: 3px;
+}
+
+::-webkit-scrollbar-thumb:hover {
+    background: #555;
+}
+
+/* ============================================
+   13. AVATAR & EFFECTS
+   ============================================ */
+.avatar-ring {
+    background: conic-gradient(from 0deg, #38bdf8, #0369a1, #38bdf8);
+    animation: rotateGlow 4s linear infinite;
+    padding: 3px;
+    border-radius: 50%;
+}
+
+.section-label {
+    font-family: ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, monospace;
+    font-size: 0.75rem;
+    letter-spacing: 0.2em;
+    text-transform: uppercase;
+    color: #38bdf8;
+}
+
+.contact-glow {
+    position: relative;
+}
+
+.contact-glow::before {
+    content: '';
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    width: 300px;
+    height: 300px;
+    background: radial-gradient(circle, rgba(56, 189, 248, 0.08), transparent 70%);
+    pointer-events: none;
+}
+
+/* ============================================
+   14. MOBILE MENU
+   ============================================ */
+.mobile-menu {
+    transform: translateX(100%);
+    transition: transform 400ms cubic-bezier(0.2, 0.8, 0.2, 1);
+}
+
+.mobile-menu.open {
+    transform: translateX(0);
+}
+
+/* ============================================
+   15. TOAST NOTIFICATIONS
+   ============================================ */
+.toast {
+    transform: translateY(100px);
+    opacity: 0;
+    transition: all 400ms cubic-bezier(0.2, 0.8, 0.2, 1);
+}
+
+.toast.show {
+    transform: translateY(0);
+    opacity: 1;
+}
+
+/* ============================================
+   16. CODE DISPLAY
+   ============================================ */
+.vm-terminal {
+    font-family: ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, monospace;
+    font-size: 0.7rem;
+    line-height: 1.6;
+    color: #38bdf8;
+}
+
+.vm-terminal .prompt {
+    color: #737373;
+}
+
+.vm-terminal .output {
+    color: #a3a3a3;
+}
+
+.vm-terminal .success {
+    color: #4ade80;
+}
+
+.vm-terminal .warning {
+    color: #facc15;
+}
+
+/* ============================================
+   17. PROJECT NUMBER DECORATION
+   ============================================ */
+.project-number {
+    font-family: 'Space Grotesk', sans-serif;
+    font-size: 5rem;
+    font-weight: 600;
+    line-height: 1;
+    color: transparent;
+    -webkit-text-stroke: 1px rgba(56, 189, 248, 0.15);
+    position: absolute;
+    top: -10px;
+    right: 16px;
+    pointer-events: none;
+}
+
+/* ============================================
+   18. SKILL BARS
+   ============================================ */
+.skill-bar-fill {
+    animation: progressFill 1.5s cubic-bezier(0.2, 0.8, 0.2, 1) forwards;
+    position: relative;
+    overflow: hidden;
+}
+
+.skill-bar-fill::after {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.15), transparent);
+    background-size: 200% 100%;
+    animation: shimmer 2.5s infinite;
+}

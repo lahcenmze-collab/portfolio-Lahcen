@@ -1,21 +1,39 @@
 <!DOCTYPE html>
 <html lang="fr">
 <head>
+    <!-- ============================================
+         META & DOCUMENT INFO
+         ============================================ -->
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta name="theme-color" content="#0f172a">
     <meta name="keywords" content="BTS SIO, virtualisation, VMware, réseaux, stage, alternance, alternance informatique, portfolio, informatique, Linux, Docker, Active Directory">
     <meta name="author" content="Lahcen Mze Soilihi">
     <meta name="description" content="Portfolio de Lahcen Mze Soilihi — Étudiant en BTS SIO spécialisé en virtualisation, réseaux et développement. Recherche actuellement une alternance en informatique. Actuellement en stage chez GES Atlantic à Nantes.">
+    
+    <!-- Open Graph -->
     <meta property="og:title" content="Lahcen Mze Soilihi">
     <meta property="og:description" content="Portfolio de Lahcen Mze Soilihi — Étudiant en BTS SIO spécialisé en virtualisation, réseaux et développement.">
     <meta property="og:type" content="website">
+    
+    <!-- ============================================
+         STYLESHEETS
+         ============================================ -->
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <title>Lahcen Mze Soilihi</title>
-    <script src="https://cdn.tailwindcss.com"></script>
+    
+    <!-- External CSS files -->
+    <link rel="stylesheet" href="styles.css">
+    
+    <!-- Font families -->
     <link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@300;400;500;600&family=Inter:wght@300;400;500&display=swap" rel="stylesheet">
     <link href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    
+    <!-- ============================================
+         SCRIPTS (async, no-defer where beneficial)
+         ============================================ -->
+    <script src="https://cdn.tailwindcss.com"></script>
     <script src="https://unpkg.com/lucide@latest"></script>
     <script>
         tailwind.config = {
@@ -30,75 +48,14 @@
             }
         }
     </script>
-    <style>
-        * { margin: 0; padding: 0; box-sizing: border-box; }
-        html { scroll-behavior: smooth; }
-        body { background: #020202; color: #fff; font-family: 'Inter', sans-serif; overflow-x: hidden; }
+</head>
 
-        :focus-visible {
-            outline: 2px solid #38bdf8;
-            outline-offset: 3px;
-        }
-
-        .skip-link {
-
-            position: absolute;
-            top: -40px;
-            left: 1rem;
-            background: rgba(0,0,0,0.85);
-            color: #fff;
-            padding: 0.75rem 1rem;
-            border-radius: 9999px;
-            z-index: 60;
-            transition: top 200ms ease;
-        }
-        .skip-link:focus {
-            top: 1rem;
-        }
-
-        @media (prefers-reduced-motion: reduce) {
-            *, *::before, *::after {
-                animation-duration: 0.01ms !important;
-                animation-iteration-count: 1 !important;
-                transition-duration: 0.01ms !important;
-                scroll-behavior: auto !important;
-            }
-        }
-
-        .grain {
-            position: fixed; top: 0; left: 0; width: 100%; height: 100%;
-            z-index: 40; pointer-events: none; opacity: 0.03;
-        }
-
-        .grid-bg {
-            background-image: linear-gradient(to right, #222 1px, transparent 1px),
-                              linear-gradient(to bottom, #222 1px, transparent 1px);
-            background-size: 40px 40px;
-            mask-image: linear-gradient(to bottom, transparent, black 30%, black 70%, transparent);
-            -webkit-mask-image: linear-gradient(to bottom, transparent, black 30%, black 70%, transparent);
-        }
-
-        .hero-gradient {
-            background: linear-gradient(to bottom, #FFFFFF, #E5E5E5, #737373);
-            -webkit-background-clip: text;
-            -webkit-text-fill-color: transparent;
-            background-clip: text;
-        }
-
-        .sky-glow { box-shadow: 0 0 20px rgba(56,189,248,0.6); }
-
-        @keyframes fadeInUp {
-            from { opacity: 0; transform: translateY(30px); }
-            to { opacity: 1; transform: translateY(0); }
-        }
-        @keyframes float {
-            0%, 100% { transform: translateY(0px); }
-            50% { transform: translateY(-10px); }
-        }
-        @keyframes ping {
-            75%, 100% { transform: scale(2); opacity: 0; }
-        }
-        @keyframes progressFill {
+<body>
+    <!-- Accessibility: Skip to main content link -->
+    <a href="#main" class="skip-link">Passer au contenu principal</a>
+    
+    <!-- Visual noise/grain effect -->
+    <div class="grain" aria-hidden="true"></div>
             from { width: 0; }
         }
         @keyframes shimmer {
@@ -425,8 +382,8 @@
             <div class="mt-10 flex flex-wrap gap-4 observe-hidden" data-observe>
                 <a href="#contact" class="animate-fade-up inline-flex items-center gap-2 px-7 py-3.5 bg-sky-400 text-black font-medium rounded-full tracking-wide hover:bg-sky-300 transition-all duration-300 hover:scale-105 sky-glow" style="opacity:0; animation-delay:500ms; box-shadow: 0 0 20px rgba(56,189,248,0.6)">
                     <i data-lucide="send" class="w-4 h-4"></i>
-                    Me contacter
-                </a>
+                 Me contacter je répond vite
+                          </a>
                 <a href="#projects" class="animate-fade-up inline-flex items-center gap-2 px-7 py-3.5 border border-neutral-700 text-neutral-300 font-medium rounded-full tracking-wide hover:border-neutral-500 hover:text-white transition-all duration-300" style="opacity:0; animation-delay:600ms">
                     <i data-lucide="folder-open" class="w-4 h-4"></i>
                     Voir mes projets
@@ -1315,98 +1272,6 @@
         <span class="text-sm text-neutral-300">Message envoyé avec succès !</span>
     </div>
 
-    <script>
-        lucide.createIcons();
-
-        // Navbar scroll
-        const navbar = document.getElementById('navbar');
-        window.addEventListener('scroll', () => {
-            if (window.scrollY > 80) {
-                navbar.style.background = 'rgba(2,2,2,0.85)';
-                navbar.style.backdropFilter = 'blur(12px)';
-                navbar.style.borderBottom = '1px solid rgba(38,38,38,0.5)';
-            } else {
-                navbar.style.background = 'transparent';
-                navbar.style.backdropFilter = 'none';
-                navbar.style.borderBottom = '1px solid transparent';
-            }
-        });
-
-        // Mobile menu
-        const menuBtn = document.getElementById('menuBtn');
-        const closeMenuBtn = document.getElementById('closeMenu');
-        const mobileMenu = document.getElementById('mobileMenu');
-        const menuOverlay = document.getElementById('menuOverlay');
-
-        function openMenu() { mobileMenu.classList.add('open'); menuOverlay.classList.remove('hidden'); document.body.style.overflow = 'hidden'; menuBtn.setAttribute('aria-expanded', 'true'); mobileMenu.setAttribute('aria-hidden', 'false'); }
-        function closeMenu() { mobileMenu.classList.remove('open'); menuOverlay.classList.add('hidden'); document.body.style.overflow = ''; menuBtn.setAttribute('aria-expanded', 'false'); mobileMenu.setAttribute('aria-hidden', 'true'); }
-
-        menuBtn.addEventListener('click', openMenu);
-        closeMenuBtn.addEventListener('click', closeMenu);
-        menuOverlay.addEventListener('click', closeMenu);
-        document.addEventListener('keydown', (e) => { if (e.key === 'Escape' && mobileMenu.classList.contains('open')) closeMenu(); });
-        document.querySelectorAll('.mobile-link').forEach(l => l.addEventListener('click', closeMenu));
-
-        // Intersection Observer
-        const observer = new IntersectionObserver((entries) => {
-            entries.forEach(entry => {
-                if (entry.isIntersecting) {
-                    entry.target.classList.remove('observe-hidden');
-                    entry.target.classList.add('observe-visible');
-                    observer.unobserve(entry.target);
-                }
-            });
-        }, { threshold: 0.1, rootMargin: '0px 0px -50px 0px' });
-
-        document.querySelectorAll('[data-observe]').forEach(el => observer.observe(el));
-
-        // Active nav link
-        const sections = document.querySelectorAll('section[id]');
-        const navLinks = document.querySelectorAll('.nav-link');
-        window.addEventListener('scroll', () => {
-            let current = '';
-            sections.forEach(s => { if (window.scrollY >= s.offsetTop - 200) current = s.id; });
-            navLinks.forEach(l => { l.classList.remove('active'); if (l.getAttribute('href') === '#' + current) l.classList.add('active'); });
-        });
-
-        // Contact form
-        document.getElementById('contactForm').addEventListener('submit', (e) => {
-            e.preventDefault();
-            const toast = document.getElementById('toast');
-            toast.classList.add('show');
-            e.target.reset();
-            setTimeout(() => toast.classList.remove('show'), 3000);
-        });
-
-        // Smooth scroll
-        document.querySelectorAll('a[href^="#"]').forEach(a => {
-            a.addEventListener('click', function(e) {
-                e.preventDefault();
-                const t = document.querySelector(this.getAttribute('href'));
-                if (t) t.scrollIntoView({ behavior: 'smooth', block: 'start' });
-            });
-        });
-
-        // Skill bars
-        const skillSection = document.getElementById('skills');
-        let skillAnimated = false;
-        const skillObs = new IntersectionObserver((entries) => {
-            entries.forEach(entry => {
-                if (entry.isIntersecting && !skillAnimated) {
-                    skillAnimated = true;
-                    document.querySelectorAll('.skill-bar-fill').forEach((bar, i) => { bar.style.animationDelay = `${i * 100}ms`; });
-                }
-            });
-        }, { threshold: 0.2 });
-        if (skillSection) skillObs.observe(skillSection);
-
-        // Cursor glow (desktop)
-        if (window.matchMedia('(min-width: 768px)').matches) {
-            const glow = document.createElement('div');
-            glow.style.cssText = 'position:fixed;width:300px;height:300px;border-radius:50%;background:radial-gradient(circle,rgba(56,189,248,0.04),transparent 70%);pointer-events:none;z-index:30;transform:translate(-50%,-50%);';
-            document.body.appendChild(glow);
-            document.addEventListener('mousemove', e => { glow.style.left = e.clientX + 'px'; glow.style.top = e.clientY + 'px'; });
-        }
-    </script>
+    <script src="script.js" defer></script>
 </body>
 </html>
