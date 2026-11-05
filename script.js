@@ -214,9 +214,11 @@ function initSkillBars() {
             if (entry.isIntersecting && !skillAnimated) {
                 skillAnimated = true;
 
-                // Stagger animation for each skill bar
                 document.querySelectorAll('.skill-bar-fill').forEach((bar, index) => {
+                    const width = bar.dataset.width || bar.style.width || '0%';
+                    bar.style.width = width;
                     bar.style.animationDelay = `${index * 100}ms`;
+                    bar.classList.add('skill-bar-animated');
                 });
             }
         });
@@ -228,7 +230,23 @@ function initSkillBars() {
 }
 
 // ===================================================
-// 9. CURSOR GLOW EFFECT (DESKTOP)
+// 9. ELEMENT READY INITIALIZATION
+// ===================================================
+
+document.addEventListener('DOMContentLoaded', () => {
+    initNavbarScroll();
+    initMobileMenu();
+    initIntersectionObserver();
+    initActiveNavTracking();
+    initContactForm();
+    initSmoothScroll();
+    initSkillBars();
+    initCursorGlow();
+    initTheme();
+});
+
+// ===================================================
+// 10. CURSOR GLOW EFFECT (DESKTOP)
 // ===================================================
 
 /**
@@ -259,37 +277,84 @@ function initCursorGlow() {
     }, { passive: true });
 }
 
-// ===================================================
-// 10. MAIN INITIALIZATION
-// ===================================================
-
-/**
- * Initialize all components when DOM is ready
- */
-document.addEventListener('DOMContentLoaded', () => {
-    initNavbarScroll();
-    initMobileMenu();
-    initIntersectionObserver();
-    initActiveNavTracking();
-    initContactForm();
-    initSmoothScroll();
-    initSkillBars();
-    initCursorGlow();
-
-    // Log initialization complete (development)
-    if (process.env.NODE_ENV !== 'production') {
-        console.log('✓ Portfolio initialized successfully');
-    }
-});
-
-// ===================================================
-// 11. PERFORMANCE MONITORING (Optional)
-// ===================================================
 
 /**
  * Report Web Vitals for performance monitoring
  * This is optional and can be removed if not needed
  */
+
+/* ==========================
+   Theme handling
+   ========================== */
+function applyTheme(theme, animate = true) {
+    const html = document.documentElement;
+    const btn = document.getElementById('themeToggle');
+    const meta = document.querySelector('meta[name="theme-color"]');
+
+    const perform = () => {
+        if (theme === 'light') {
+            html.classList.add('light');
+            if (btn) {
+                btn.setAttribute('aria-pressed', 'true');
+                btn.classList.add('is-light');
+            }
+            if (meta) meta.setAttribute('content', '#ffffff');
+        } else {
+            html.classList.remove('light');
+            if (btn) {
+                btn.setAttribute('aria-pressed', 'false');
+                btn.classList.remove('is-light');
+            }
+            if (meta) meta.setAttribute('content', '#0f172a');
+        }
+        try { localStorage.setItem('theme', theme); } catch (e) { /* ignore */ }
+    };
+
+    if (!animate) {
+        perform();
+        return;
+    }
+
+    // Create overlay to emphasize switch
+    const overlay = document.createElement('div');
+    overlay.className = 'theme-switch-overlay';
+    // choose overlay darkness based on target theme for better visual
+    if (theme === 'dark') overlay.classList.add('dark');
+    document.body.appendChild(overlay);
+
+    // force layout to ensure transition
+    // eslint-disable-next-line no-unused-expressions
+    overlay.getBoundingClientRect();
+
+    // fade in overlay, then switch theme, then fade out
+    overlay.style.opacity = '1';
+    setTimeout(() => {
+        perform();
+        // small delay so the theme change is visible beneath the overlay
+        setTimeout(() => {
+            overlay.style.opacity = '0';
+            overlay.addEventListener('transitionend', () => overlay.remove(), { once: true });
+        }, 220);
+    }, 180);
+}
+
+function initTheme() {
+    const btn = document.getElementById('themeToggle');
+    if (!btn) return;
+    let stored = null;
+    try { stored = localStorage.getItem('theme'); } catch (e) { /* ignore */ }
+
+    const prefersLight = window.matchMedia && window.matchMedia('(prefers-color-scheme: light)').matches;
+    const initial = stored || (prefersLight ? 'light' : 'dark');
+    applyTheme(initial, false);
+
+    btn.addEventListener('click', () => {
+        const current = document.documentElement.classList.contains('light') ? 'light' : 'dark';
+        const next = current === 'light' ? 'dark' : 'light';
+        applyTheme(next);
+    });
+}
+
 if ('PerformanceObserver' in window) {
     try {
         const observer = new PerformanceObserver((list) => {

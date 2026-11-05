@@ -20,8 +20,8 @@ html {
 }
 
 body {
-    background: #020202;
-    color: #fff;
+    background: var(--bg, #020202);
+    color: var(--text, #fff);
     font-family: 'Inter', sans-serif;
     overflow-x: hidden;
     line-height: 1.5;
@@ -40,7 +40,7 @@ body {
     top: -40px;
     left: 1rem;
     background: rgba(0, 0, 0, 0.85);
-    color: #fff;
+    color: var(--text, #fff);
     padding: 0.75rem 1rem;
     border-radius: 9999px;
     z-index: 60;
@@ -435,12 +435,14 @@ body {
 .toast {
     transform: translateY(100px);
     opacity: 0;
-    transition: all 400ms cubic-bezier(0.2, 0.8, 0.2, 1);
+    pointer-events: none;
+    transition: transform 400ms cubic-bezier(0.2, 0.8, 0.2, 1), opacity 400ms ease;
 }
 
 .toast.show {
     transform: translateY(0);
     opacity: 1;
+    pointer-events: auto;
 }
 
 /* ============================================
@@ -489,9 +491,14 @@ body {
    18. SKILL BARS
    ============================================ */
 .skill-bar-fill {
-    animation: progressFill 1.5s cubic-bezier(0.2, 0.8, 0.2, 1) forwards;
+    width: 0;
     position: relative;
     overflow: hidden;
+    transition: width 1.4s cubic-bezier(0.2, 0.8, 0.2, 1);
+}
+
+.skill-bar-fill.skill-bar-animated {
+    animation: none;
 }
 
 .skill-bar-fill::after {
@@ -505,3 +512,161 @@ body {
     background-size: 200% 100%;
     animation: shimmer 2.5s infinite;
 }
+
+/* Theme variables (light/dark) and toggle styles */
+:root{
+    /* New palette: Deep Navy + Violet Accent */
+    --bg: #071029; /* page background */
+    --surface: #0e1724; /* cards / panels */
+    --text: #e6eef8; /* main text */
+    --muted: #9ab0c8; /* muted text */
+    --accent: #7c5cff; /* primary accent (violet) */
+    --accent-2: #00d4ff; /* secondary accent (cyan) */
+    --glass: rgba(255,255,255,0.04);
+}
+
+html.light{
+    --bg: #f6f9fb;
+    --surface: #ffffff;
+    --text: #071029;
+    --muted: #4b5563;
+    --accent: #7c5cff;
+    --accent-2: #0ea5e9;
+    --glass: rgba(8,15,25,0.02);
+}
+
+/* Theme toggle button */
+#themeToggle {
+    background: transparent;
+    border: 0;
+    color: var(--text);
+    padding: 6px 8px;
+    border-radius: 8px;
+    font-size: 18px;
+    cursor: pointer;
+}
+
+/* Small overrides to make key UI pieces adapt to variables */
+body {
+    background: var(--bg);
+    color: var(--text);
+}
+
+nav, .mobile-menu {
+    background: linear-gradient(180deg, rgba(255,255,255,0.02), transparent);
+}
+
+.card-hover, .project-card, .mobile-menu, .avatar-ring > div, .tag {
+    background: var(--surface);
+}
+
+/* Example: adjust scrollbar background to theme-aware */
+::-webkit-scrollbar-track {
+    background: color-mix(in srgb, var(--bg) 80%, black 20%);
+}
+
+/* slight tag tweak in light */
+html.light .tag {
+    border-color: rgba(7,16,41,0.04);
+    background: rgba(7,16,41,0.02);
+}
+
+/* Global overrides to make Tailwind utility colors look consistent */
+.text-neutral-400, .text-neutral-300, .text-neutral-500, .text-neutral-600 {
+    color: var(--muted) !important;
+}
+.text-white {
+    color: var(--text) !important;
+}
+.bg-[#050505], .bg-neutral-800, .bg-neutral-900 {
+    background: var(--surface) !important;
+}
+.bg-sky-400, .text-sky-400, .sky-glow {
+    color: var(--accent) !important;
+}
+.bg-emerald-400 {
+    background: linear-gradient(90deg, var(--accent-2), var(--accent)) !important;
+}
+
+/* Hero gradient tuned to new accent */
+.hero-gradient {
+    background: linear-gradient(180deg, var(--accent), color-mix(in srgb, var(--accent) 60%, white 20%), var(--muted));
+}
+
+/* Accent effects */
+.avatar-ring { background: conic-gradient(from 0deg, var(--accent), var(--accent-2), var(--accent)); }
+.project-number { -webkit-text-stroke: 1px rgba(124,92,255,0.12); }
+.sky-glow { box-shadow: 0 0 30px rgba(124,92,255,0.35); }
+
+/* Skill bars accent */
+.skill-bar-fill { background: linear-gradient(90deg, var(--accent-2), var(--accent)); }
+
+/* Buttons */
+.contact-glow::before { background: radial-gradient(circle, rgba(124,92,255,0.08), transparent 70%); }
+
+/* Slightly darker overlay for mobile menu */
+.mobile-menu { background: linear-gradient(180deg, rgba(7,10,20,0.9), rgba(7,10,20,0.95)); }
+
+/* Smooth transitions for theme color changes */
+/* Smooth transitions for theme color changes */
+body, nav, .mobile-menu, .card-hover, .project-card, .tag, .skip-link {
+    transition: background-color 600ms cubic-bezier(0.2,0.8,0.2,1), color 600ms cubic-bezier(0.2,0.8,0.2,1), border-color 420ms ease, box-shadow 420ms ease;
+}
+
+/* Theme toggle icon styles */
+#themeToggle{
+    width:36px;
+    height:36px;
+    display:inline-flex;
+    align-items:center;
+    justify-content:center;
+    position:relative;
+}
+.theme-icon{
+    position:absolute;
+    width:20px;
+    height:20px;
+    color:var(--accent);
+    opacity:0;
+    transform-origin:center center;
+    transition:opacity 260ms cubic-bezier(0.2,0.9,0.2,1), transform 360ms cubic-bezier(0.2,0.9,0.2,1);
+}
+.icon-sun{
+    transform: scale(0.8) rotate(-20deg);
+}
+.icon-moon{
+    transform: scale(1) rotate(0deg);
+    opacity:1;
+}
+
+html.light .icon-sun{
+    opacity:1;
+    transform: scale(1) rotate(0deg);
+}
+html.light .icon-moon{
+    opacity:0;
+    transform: scale(0.8) rotate(20deg);
+}
+
+/* Respect reduced motion */
+@media (prefers-reduced-motion: reduce){
+    .theme-icon, #themeToggle, body, nav { transition: none !important; }
+}
+
+/* Full-screen overlay used to emphasize theme switch */
+.theme-switch-overlay {
+    position: fixed;
+    inset: 0;
+    pointer-events: none;
+    z-index: 9999;
+    opacity: 0;
+    transition: opacity 420ms cubic-bezier(0.2,0.9,0.2,1);
+    background: linear-gradient(120deg, rgba(124,92,255,0.12), rgba(0,212,255,0.08));
+    backdrop-filter: blur(2px);
+}
+
+/* Darker overlay when switching to dark (applied via inline style from JS if needed) */
+.theme-switch-overlay.dark {
+    background: linear-gradient(120deg, rgba(7,16,41,0.9), rgba(7,10,20,0.6));
+}
+
